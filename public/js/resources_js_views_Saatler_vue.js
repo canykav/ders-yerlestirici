@@ -215,7 +215,9 @@ var render = function() {
           _c(
             "CCard",
             [
-              _c("CCardHeader", [_c("strong", [_vm._v("Ders Saati Ekle")])]),
+              _c("CCardHeader", [
+                _vm._v("\n            Ders Saati Ekle\n          ")
+              ]),
               _vm._v(" "),
               _c(
                 "CCardBody",
@@ -321,7 +323,7 @@ var render = function() {
             "CCard",
             [
               _c("CCardHeader", [
-                _c("strong", [_vm._v("Eklenen Ders Saatleri")])
+                _vm._v("\n            Eklenen Ders Saatleri\n          ")
               ]),
               _vm._v(" "),
               _c("CCardBody", [

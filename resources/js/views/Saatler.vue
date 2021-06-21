@@ -3,7 +3,7 @@
       <CCol sm="6">
         <CCard>
           <CCardHeader>
-            <strong>Ders Saati Ekle</strong>
+            Ders Saati Ekle
           </CCardHeader>
           <CCardBody>
     
@@ -52,7 +52,7 @@
       <CCol sm="6">
         <CCard>
           <CCardHeader>
-            <strong>Eklenen Ders Saatleri</strong>
+            Eklenen Ders Saatleri
           </CCardHeader>
           <CCardBody>
 
