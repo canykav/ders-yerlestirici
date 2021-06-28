@@ -22139,6 +22139,20 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__.default);
 Vue.config.performance = true;
 Vue.use((_coreui_vue__WEBPACK_IMPORTED_MODULE_5___default()));
 Vue.prototype.$log = console.log.bind(console);
+
+var formatTime = function formatTime(value) {
+  if (value == "" || value == null) {
+    return value;
+  } else {
+    value = new Date(value).toLocaleTimeString('tr-TR', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    return value;
+  }
+};
+
+Vue.filter('formatTime', formatTime);
 Vue.component('App', __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue").default);
 new Vue({
   el: '#app',

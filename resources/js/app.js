@@ -18,6 +18,17 @@ Vue.config.performance = true
 Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
 
+const formatTime = (value) => {
+  if (value == "" || value == null) {
+    return value;
+  } else {
+    value = new Date(value).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
+    return value;
+  }
+}
+Vue.filter('formatTime', formatTime);
+
+
    Vue.component(
         'App',
         require('./App.vue').default

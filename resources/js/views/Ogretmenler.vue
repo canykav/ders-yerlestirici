@@ -33,7 +33,7 @@
           </CCardHeader>
           <CCardBody>
             <label>Girdiği Dersler</label>
-            <select class="custom-select" multiple>
+            <select class="custom-select" size="4">
   <option selected>Görsel Programlama</option>
   <option value="1">Bilgisayarlar ve Network</option>
 </select>
@@ -47,6 +47,7 @@
                 <CCol sm="6" class="mt-2">
                 <CInput
                   label="Uygun Ders Saati"
+                  readonly
                 />
               </CCol>
             </CRow>

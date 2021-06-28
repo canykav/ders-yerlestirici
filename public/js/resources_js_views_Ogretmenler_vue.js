@@ -113,6 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -287,10 +288,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "select",
-                        {
-                          staticClass: "custom-select",
-                          attrs: { multiple: "" }
-                        },
+                        { staticClass: "custom-select", attrs: { size: "4" } },
                         [
                           _c("option", { attrs: { selected: "" } }, [
                             _vm._v("Görsel Programlama")
@@ -321,7 +319,10 @@ var render = function() {
                             { staticClass: "mt-2", attrs: { sm: "6" } },
                             [
                               _c("CInput", {
-                                attrs: { label: "Uygun Ders Saati" }
+                                attrs: {
+                                  label: "Uygun Ders Saati",
+                                  readonly: ""
+                                }
                               })
                             ],
                             1

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SaatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 Route::any('/{all}', function () {
     return view('home');
