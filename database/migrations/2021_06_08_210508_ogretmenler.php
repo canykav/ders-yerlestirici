@@ -17,7 +17,6 @@ class Ogretmenler extends Migration
             $table->id();
             $table->string('ad');
             $table->integer('toplam_saat');
-            $table->integer('uygun_saat');
         });
     }
 

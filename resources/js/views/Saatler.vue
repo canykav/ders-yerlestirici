@@ -13,10 +13,12 @@
       <CCol sm="6">
                 <CCard>
           <CCardHeader>
-            Ders Günleri
+            Ders Günleri ve Saatleri
           </CCardHeader>
           <CCardBody>
-          <form @submit.prevent="createGun()">
+          <CTabs variant="pills" :active-tab.sync="activeTab">
+              <CTab title="Ders Günleri">
+                       <form @submit.prevent="createGun()">
 <div class="table-responsive">
               <table  v-if='kayitliGunler==false' class="table table-bordered table-sm" style="border-top:none;">            
                <tbody>
@@ -41,26 +43,11 @@
                 >
                 Kaydet
                 </CButton>
-
-                <CButton 
-                  color="danger" 
-                  v-if="kayitliGunler==true"
-                  @click="resetGunler()"
-                >
-                Sıfırla
-                </CButton>
               </div>
             </form>
-          </CCardBody>
-        </CCard>
-
-        <CCard>
-          <CCardHeader>
-            Ders Saatleri
-          </CCardHeader>
-          <CCardBody>
-            
-          <form @submit.prevent="createSaat()">
+              </CTab>
+              <CTab title="Ders Saatleri">
+         <form @submit.prevent="createSaat()">
               <CSelect
                 label="Öğretim"
                 horizontal
@@ -85,14 +72,22 @@
                   <CButton type="submit" color="info">Ekle</CButton>
                 </div>
             </form>
+              </CTab>
+          </CTabs>                       
+            
+        
           </CCardBody>
         </CCard>
+
       </CCol>
           
       <CCol sm="6">
         <CCard>
           <CCardHeader>
             Eklenen Ders Saatleri
+            <div class="card-header-actions">
+              <CButton type="submit" color="dark" @click="resetGunler()">Sıfırla</CButton>
+            </div>
           </CCardHeader>
           <CCardBody>
 
@@ -149,11 +144,12 @@ export default {
           errors: null,
           dismissSecs: 5,
           dismissCountDown: 5,
+          activeTab: null,
         }      
     },
     mounted() {
-      this.ListSaatler();
-      this.ListGunler();
+      this.listSaatler();
+      this.listGunler();
     },
     methods: {
       createGun(){
@@ -161,7 +157,7 @@ export default {
                 gun: this.gunler,
             })
             .then(response => {
-                this.ListGunler();
+                this.listGunler();
             })
             .catch(error => {
               this.errors = error.response.data.errors;
@@ -171,8 +167,8 @@ export default {
       resetGunler(){
         axios.delete('/api/gunler')
             .then(response => {
-                this.ListGunler();
-                this.ListSaatler();
+                this.listGunler();
+                this.listSaatler();
             })
             .catch(error => {
               this.errors = error.response.data.errors;
@@ -196,10 +192,10 @@ export default {
               this.showAlert();
             })
             .then( () => {
-                this.ListSaatler();
+                this.listSaatler();
             });
       },
-      ListSaatler() {
+      listSaatler() {
         axios.get('/api/saatler')
             .then(response => {
                 this.gunlerVeSaatler = response.data.data;
@@ -208,14 +204,16 @@ export default {
 				      console.log(error.response.data);
             });
       },
-      ListGunler() {
+      listGunler() {
       axios.get('/api/gunler')
             .then(response => {
                 console.log(response);
                 if(response.status==204) {
                   this.kayitliGunler=false;
+                  this.activeTab=0;
                 } else {
                   this.kayitliGunler=true;
+                  this.activeTab=1;
                   this.gunler=response.data;
                 }
             })
@@ -230,8 +228,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .form-check-input {
   position:unset!important;
+}
+ul.nav {
+  margin-bottom: 20px;
 }
 </style>

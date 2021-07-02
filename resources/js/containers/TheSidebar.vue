@@ -52,7 +52,4 @@ export default {
 .c-sidebar {
   background: #2e394c;
 }
-.c-sidebar .c-sidebar-nav-link:hover, .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
-  background: #1d70ec;
-}
 </style>

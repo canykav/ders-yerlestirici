@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaatController;
 use App\Http\Controllers\GunController;
+use App\Http\Controllers\OgretmenController;
+use App\Http\Controllers\DerslikController;
+use App\Http\Controllers\BolumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +39,26 @@ Route::prefix('/gunler')->group(function () {
     Route::delete('/', [GunController::class, 'destroy']);
 });
 
+Route::prefix('/ogretmenler')->group(function () {
+    Route::get('/', [OgretmenController::class, 'index']);
+    Route::post('/', [OgretmenController::class, 'store']);
+    Route::put('/{ogretmen_id}', [OgretmenController::class, 'update']);
+    Route::get('/{ogretmen_id}', [OgretmenController::class, 'show']);
+    Route::delete('/', [OgretmenController::class, 'destroy']);
+});
+
+Route::prefix('/bolumler')->group(function () {
+    Route::get('/', [BolumController::class, 'index']);
+    Route::post('/', [BolumController::class, 'store']);
+    Route::put('/{bolum_id}', [BolumController::class, 'update']);
+    Route::get('/{bolum_id}', [BolumController::class, 'show']);
+    Route::delete('/', [BolumController::class, 'destroy']);
+});
+
+Route::prefix('/derslikler')->group(function () {
+    Route::get('/', [DerslikController::class, 'index']);
+    Route::post('/', [DerslikController::class, 'store']);
+    Route::put('/{derslik_id}', [DerslikController::class, 'update']);
+    Route::get('/{derslik_id}', [DerslikController::class, 'show']);
+    Route::delete('/', [DerslikController::class, 'destroy']);
+});

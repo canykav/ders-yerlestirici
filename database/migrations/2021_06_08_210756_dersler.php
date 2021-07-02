@@ -18,11 +18,13 @@ class Dersler extends Migration
             $table->string('kod')->nullable();
             $table->string('ad');
             $table->unsignedBigInteger('bolum');
+            $table->unsignedBigInteger('ogretmen');
             $table->integer('teorik')->nullable();
             $table->integer('lab')->nullable();
             $table->unsignedBigInteger('teorik_derslik')->nullable();
             $table->unsignedBigInteger('lab_derslik')->nullable();
             $table->foreign('bolum')->references('id')->on('bolumler')->onDelete('cascade');
+            $table->foreign('ogretmen')->references('id')->on('ogretmenler')->onDelete('cascade');
             $table->foreign('teorik_derslik')->references('id')->on('derslikler')->onDelete('cascade');
             $table->foreign('lab_derslik')->references('id')->on('derslikler')->onDelete('cascade');
         });

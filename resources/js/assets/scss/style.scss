@@ -1,6 +1,24 @@
 // If you want to override variables do it here
+
+
+
+$primary-base: #3a7cce;
+$primary-100:  #3a7cce;
+$primary-200:  #3a7cce;
+$primary-300:  #3a7cce;
+$primary-400:  #3a7cce;
+$primary-500:  #3a7cce;
+$primary-600:  #3a7cce;
+$primary-700:  #3a7cce;
+$primary-800:  #3a7cce;
+$primary-900:  #3a7cce;
+$primary-dark: #3a7cce;
+$primary:      #3a7cce;
+$primary-50:   #3a7cce;
+$primary-25:   #3a7cce;
+
+
 @import "variables";
-$value: #dedede;
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
 

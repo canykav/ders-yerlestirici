@@ -24,4 +24,9 @@ class Ders extends Model
     ];
 
     public $timestamps = false;
+
+    public function bolum()
+    {
+        return $this->hasOne(bolum::class, 'id', 'bolum');
+    }
 }

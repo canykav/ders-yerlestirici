@@ -20,4 +20,9 @@ class Ogretmen extends Model
     ];
 
     public $timestamps = false;
+
+    public function dersler()
+    {
+        return $this->hasMany(ders::class, 'ogretmen', 'id');
+    }
 }

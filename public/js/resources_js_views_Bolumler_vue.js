@@ -1,5 +1,35 @@
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_Bolumler_vue"],{
 
+/***/ "./node_modules/@coreui/icons/js/free/cil-trash.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@coreui/icons/js/free/cil-trash.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cilTrash": () => (/* binding */ cilTrash)
+/* harmony export */ });
+const cilTrash = ["512 512","<path fill='var(--ci-primary-color, currentColor)' d='M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z' class='ci-primary'/><rect width='32' height='200' x='168' y='216' fill='var(--ci-primary-color, currentColor)' class='ci-primary'/><rect width='32' height='200' x='240' y='216' fill='var(--ci-primary-color, currentColor)' class='ci-primary'/><rect width='32' height='200' x='312' y='216' fill='var(--ci-primary-color, currentColor)' class='ci-primary'/><path fill='var(--ci-primary-color, currentColor)' d='M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z' class='ci-primary'/>"]
+
+/***/ }),
+
+/***/ "./node_modules/@coreui/icons/js/free/cil-zoom.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@coreui/icons/js/free/cil-zoom.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cilZoom": () => (/* binding */ cilZoom)
+/* harmony export */ });
+const cilZoom = ["512 512","<path fill='var(--ci-primary-color, currentColor)' d='M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z' class='ci-primary'/>"]
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Bolumler.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Bolumler.vue?vue&type=script&lang=js& ***!
@@ -13,6 +43,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _base_Table_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base/Table.vue */ "./resources/js/views/base/Table.vue");
 /* harmony import */ var _users_UsersData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users/UsersData */ "./resources/js/views/users/UsersData.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-trash.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-zoom.js");
 //
 //
 //
@@ -144,32 +176,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  trash: _coreui_icons__WEBPACK_IMPORTED_MODULE_2__.cilTrash,
+  zoom: _coreui_icons__WEBPACK_IMPORTED_MODULE_3__.cilZoom,
   components: {
     CTableWrapper: _base_Table_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   data: function data() {
     return {
-      ogretmenler: [{
-        'ad': 'Zekeriya Filiz'
-      }]
+      bolumEkleModal: false,
+      bolumler: {},
+      yeniBolum: {},
+      message: null,
+      dismissSecs: 5,
+      dismissCountDown: 0
     };
   },
+  mounted: function mounted() {
+    this.listBolumler();
+  },
   methods: {
-    getShuffledUsersData: function getShuffledUsersData() {
-      return this.shuffleArray(_users_UsersData__WEBPACK_IMPORTED_MODULE_1__.default.slice(0));
-    },
-    shuffleArray: function shuffleArray(array) {
-      for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-      }
+    createBolum: function createBolum() {
+      var _this = this;
 
-      return array;
+      axios.post('/api/bolumler', {
+        ad: this.yeniBolum.ad,
+        ogretim: this.yeniBolum.ogretim
+      }).then(function (response) {
+        _this.listBolumler();
+
+        _this.bolumEkleModal = false;
+        _this.message = 'Bölüm başarıyla eklendi.';
+
+        _this.showAlert();
+
+        _this.yeniBolum = {};
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    listBolumler: function listBolumler() {
+      var _this2 = this;
+
+      axios.get('/api/bolumler').then(function (response) {
+        _this2.bolumler = response.data.data;
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    showAlert: function showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     }
   }
 });
@@ -552,165 +619,405 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "CRow",
+    "div",
     [
       _c(
-        "CCol",
-        { attrs: { sm: "6" } },
+        "CAlert",
+        {
+          attrs: {
+            show: _vm.dismissCountDown,
+            closeButton: "",
+            color: "success"
+          },
+          on: {
+            "update:show": function($event) {
+              _vm.dismissCountDown = $event
+            }
+          }
+        },
+        [
+          _vm._v(
+            "\r\n              " + _vm._s(_vm.message) + "\r\n            "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "CRow",
         [
           _c(
-            "CCard",
+            "CCol",
+            { attrs: { sm: "6" } },
             [
-              _c("CCardHeader", [
-                _vm._v("\n            Bölümler\n           "),
-                _c(
-                  "div",
-                  { staticClass: "card-header-actions" },
-                  [
+              _c(
+                "CCard",
+                [
+                  _c("CCardHeader", [
+                    _vm._v("\r\n            Bölümler\r\n           "),
                     _c(
-                      "CButton",
-                      { attrs: { type: "submit", color: "dark" } },
-                      [_vm._v("Bölüm Ekle")]
+                      "div",
+                      { staticClass: "card-header-actions" },
+                      [
+                        _c(
+                          "CButton",
+                          {
+                            attrs: { type: "submit", color: "dark" },
+                            on: {
+                              click: function($event) {
+                                _vm.bolumEkleModal = true
+                              }
+                            }
+                          },
+                          [_vm._v("Bölüm Ekle")]
+                        )
+                      ],
+                      1
                     )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("CCardBody", [
-                _c("table", { staticClass: "table table-bordered" }, [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "col" } }, [
-                        _vm._v("Bölüm Adı")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [
-                        _vm._v("Öğretim")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "th",
-                        {
-                          staticStyle: { width: "187px" },
-                          attrs: { scope: "col" }
-                        },
-                        [_vm._v("İşlem")]
-                      )
-                    ])
                   ]),
                   _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v("Mark")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Otto")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "CButtonGroup",
-                            [
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "dark" } },
-                                [_vm._v("Seç")]
-                              ),
+                  _c("CCardBody", [
+                    _c(
+                      "table",
+                      { staticClass: "table table-bordered table-hover" },
+                      [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Bölüm Adı")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Öğretim")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "th",
+                              {
+                                staticStyle: { width: "150px" },
+                                attrs: { scope: "col" }
+                              },
+                              [_vm._v("İşlem")]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.bolumler, function(bolum) {
+                            return _c("tr", { key: bolum.id }, [
+                              _c("td", [_vm._v(_vm._s(bolum.ad))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(bolum.ogretim))]),
                               _vm._v(" "),
                               _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "info" } },
-                                [_vm._v("Düzenle")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "danger" } },
-                                [_vm._v("Sil")]
+                                "td",
+                                [
+                                  _c(
+                                    "CButtonGroup",
+                                    [
+                                      _c(
+                                        "CButton",
+                                        {
+                                          attrs: {
+                                            type: "submit",
+                                            color: "dark",
+                                            title: "Seç ve Görüntüle"
+                                          }
+                                        },
+                                        [
+                                          _c("CIcon", {
+                                            attrs: {
+                                              content: _vm.$options.zoom
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "CButton",
+                                        {
+                                          attrs: {
+                                            type: "submit",
+                                            color: "info",
+                                            title: "Düzenle"
+                                          }
+                                        },
+                                        [
+                                          _c("CIcon", {
+                                            attrs: { name: "cil-pencil" }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "CButton",
+                                        {
+                                          attrs: {
+                                            type: "submit",
+                                            color: "danger",
+                                            title: "Sil"
+                                          }
+                                        },
+                                        [
+                                          _c("CIcon", {
+                                            attrs: {
+                                              content: _vm.$options.trash
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
                               )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", [_vm._v("Jacob")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Thornton")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "CButtonGroup",
-                            [
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "dark" } },
-                                [_vm._v("Seç")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "info" } },
-                                [_vm._v("Düzenle")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "danger" } },
-                                [_vm._v("Sil")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", [_vm._v("Larry")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("the Bird")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "CButtonGroup",
-                            [
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "dark" } },
-                                [_vm._v("Seç")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "info" } },
-                                [_vm._v("Düzenle")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "danger" } },
-                                [_vm._v("Sil")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ])
+                            ])
+                          }),
+                          0
+                        )
+                      ]
+                    )
                   ])
-                ])
-              ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "CCol",
+            { attrs: { sm: "6" } },
+            [
+              _c(
+                "CCard",
+                [
+                  _c("CCardHeader", [
+                    _vm._v(
+                      "\r\n            Seçili Bölüme Ait Dersler\r\n            "
+                    ),
+                    _c(
+                      "div",
+                      { staticClass: "card-header-actions" },
+                      [
+                        _c(
+                          "CButton",
+                          { attrs: { type: "submit", color: "dark" } },
+                          [_vm._v("Bölüme Ders Ekle")]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("CCardBody", [
+                    _c(
+                      "table",
+                      { staticClass: "table table-bordered table-hover" },
+                      [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Ders Kodu")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Ders")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Teorik")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Uygulama")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Öğretmen")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "th",
+                              {
+                                staticStyle: { width: "108px" },
+                                attrs: { scope: "col" }
+                              },
+                              [_vm._v("İşlem")]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c("tr", [
+                            _c("th", [_vm._v("1")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Veri Tabanı")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("4")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("0")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Nurcan Seylan")]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "CButtonGroup",
+                                  [
+                                    _c(
+                                      "CButton",
+                                      {
+                                        attrs: { type: "submit", color: "info" }
+                                      },
+                                      [
+                                        _c("CIcon", {
+                                          attrs: { name: "cil-pencil" }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "CButton",
+                                      {
+                                        attrs: {
+                                          type: "submit",
+                                          color: "danger"
+                                        }
+                                      },
+                                      [
+                                        _c("CIcon", {
+                                          attrs: { content: _vm.$options.trash }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("th", [_vm._v("1")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Veri Tabanı")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("4")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("0")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Nurcan Seylan")]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "CButtonGroup",
+                                  [
+                                    _c(
+                                      "CButton",
+                                      {
+                                        attrs: { type: "submit", color: "info" }
+                                      },
+                                      [
+                                        _c("CIcon", {
+                                          attrs: { name: "cil-pencil" }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "CButton",
+                                      {
+                                        attrs: {
+                                          type: "submit",
+                                          color: "danger"
+                                        }
+                                      },
+                                      [
+                                        _c("CIcon", {
+                                          attrs: { content: _vm.$options.trash }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("th", [_vm._v("1")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Veri Tabanı")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("4")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("0")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Nurcan Seylan")]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "CButtonGroup",
+                                  [
+                                    _c(
+                                      "CButton",
+                                      {
+                                        attrs: { type: "submit", color: "info" }
+                                      },
+                                      [
+                                        _c("CIcon", {
+                                          attrs: { name: "cil-pencil" }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "CButton",
+                                      {
+                                        attrs: {
+                                          type: "submit",
+                                          color: "danger"
+                                        }
+                                      },
+                                      [
+                                        _c("CIcon", {
+                                          attrs: { content: _vm.$options.trash }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -719,163 +1026,93 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "CCol",
-        { attrs: { sm: "6" } },
+        "form",
+        {
+          attrs: { id: "createBolumForm" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.createBolum()
+            }
+          }
+        },
         [
           _c(
-            "CCard",
-            [
-              _c("CCardHeader", [
-                _vm._v("\n            Seçili Bölüme Ait Dersler\n            "),
-                _c(
-                  "div",
-                  { staticClass: "card-header-actions" },
-                  [
-                    _c(
-                      "CButton",
-                      { attrs: { type: "submit", color: "dark" } },
-                      [_vm._v("Bölüme Ders Ekle")]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("CCardBody", [
-                _c("table", { staticClass: "table table-bordered" }, [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "col" } }, [
-                        _vm._v("Ders Kodu")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Ders")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Teorik")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [
-                        _vm._v("Uygulama")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [
-                        _vm._v("Öğretmen")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("İşlem")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("th", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Veri Tabanı")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("4")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("0")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Nurcan Seylan")]),
+            "CModal",
+            {
+              attrs: {
+                title: "Yeni Bölüm",
+                size: "sm",
+                show: _vm.bolumEkleModal
+              },
+              on: {
+                "update:show": function($event) {
+                  _vm.bolumEkleModal = $event
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "footer",
+                  fn: function() {
+                    return [
+                      _c(
+                        "CButton",
+                        {
+                          attrs: { color: "secondary" },
+                          on: {
+                            click: function($event) {
+                              _vm.bolumEkleModal = false
+                            }
+                          }
+                        },
+                        [_vm._v("Vazgeç")]
+                      ),
                       _vm._v(" "),
                       _c(
-                        "td",
-                        [
-                          _c(
-                            "CButtonGroup",
-                            [
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "info" } },
-                                [_vm._v("Düzenle")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "danger" } },
-                                [_vm._v("Sil")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
+                        "CButton",
+                        {
+                          attrs: {
+                            form: "createBolumForm",
+                            type: "submit",
+                            color: "primary"
+                          }
+                        },
+                        [_vm._v("Kaydet")]
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Veri Tabanı")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("4")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("0")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Nurcan Seylan")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "CButtonGroup",
-                            [
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "info" } },
-                                [_vm._v("Düzenle")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "danger" } },
-                                [_vm._v("Sil")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Veri Tabanı")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("4")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("0")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Nurcan Seylan")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "CButtonGroup",
-                            [
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "info" } },
-                                [_vm._v("Düzenle")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "CButton",
-                                { attrs: { type: "submit", color: "danger" } },
-                                [_vm._v("Sil")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ])
+                    ]
+                  },
+                  proxy: true
+                }
               ])
+            },
+            [
+              _c("CInput", {
+                attrs: {
+                  label: "Bölüm Adı",
+                  value: _vm.yeniBolum.ad,
+                  required: ""
+                },
+                on: {
+                  "update:value": function($event) {
+                    return _vm.$set(_vm.yeniBolum, "ad", $event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("CSelect", {
+                attrs: {
+                  label: "Öğretim",
+                  options: ["Örgün Öğretim", "İkinci Öğretim"],
+                  placeholder: "Seçiniz",
+                  value: _vm.yeniBolum.ogretim,
+                  required: ""
+                },
+                on: {
+                  "update:value": function($event) {
+                    return _vm.$set(_vm.yeniBolum, "ogretim", $event)
+                  }
+                }
+              })
             ],
             1
           )

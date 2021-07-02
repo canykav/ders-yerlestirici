@@ -114,11 +114,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      ogretmenler: ['Test']
+      ogretmenler: null,
+      ogretmenEkleModal: false,
+      yeniOgretmen: {},
+      ogretmen: [],
+      message: null,
+      dismissSecs: 5,
+      dismissCountDown: 0
     };
+  },
+  props: {
+    selectedOgretmen: Number
+  },
+  mounted: function mounted() {
+    this.listOgretmenler();
+  },
+  methods: {
+    listOgretmenler: function listOgretmenler() {
+      var _this = this;
+
+      axios.get('/api/ogretmenler').then(function (response) {
+        _this.ogretmenler = response.data.data;
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    deleteOgretmen: function deleteOgretmen() {
+      var _this2 = this;
+
+      axios["delete"]('/api/ogretmenler', {
+        params: {
+          id: this.selectedOgretmen
+        }
+      }).then(function (response) {
+        _this2.listOgretmenler();
+
+        _this2.message = 'Öğretmen başarıyla silindi.';
+
+        _this2.showAlert();
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    createOgretmen: function createOgretmen() {
+      var _this3 = this;
+
+      axios.post('/api/ogretmenler', {
+        ad: this.yeniOgretmen.ad,
+        toplam_saat: this.yeniOgretmen.toplamSaat
+      }).then(function (response) {
+        _this3.listOgretmenler();
+
+        _this3.ogretmenEkleModal = false;
+        _this3.message = 'Öğretmen başarıyla eklendi.';
+
+        _this3.showAlert();
+
+        _this3.yeniOgretmen = {};
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    getOgretmenInfo: function getOgretmenInfo(ogretmen) {
+      var _this4 = this;
+
+      axios.get('/api/ogretmenler/' + ogretmen).then(function (response) {
+        _this4.ogretmen = response.data.data;
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    showAlert: function showAlert() {
+      this.dismissCountDown = this.dismissSecs;
+    }
   }
 });
 
@@ -216,6 +313,27 @@ var render = function() {
     "div",
     [
       _c(
+        "CAlert",
+        {
+          attrs: {
+            show: _vm.dismissCountDown,
+            closeButton: "",
+            color: "success"
+          },
+          on: {
+            "update:show": function($event) {
+              _vm.dismissCountDown = $event
+            }
+          }
+        },
+        [
+          _vm._v(
+            "\r\n              " + _vm._s(_vm.message) + "\r\n            "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
         "CCard",
         [
           _c("CCardHeader", [
@@ -224,9 +342,18 @@ var render = function() {
               "div",
               { staticClass: "card-header-actions" },
               [
-                _c("CButton", { attrs: { type: "submit", color: "dark" } }, [
-                  _vm._v("Öğretmen Ekle")
-                ])
+                _c(
+                  "CButton",
+                  {
+                    attrs: { type: "submit", color: "dark" },
+                    on: {
+                      click: function($event) {
+                        _vm.ogretmenEkleModal = true
+                      }
+                    }
+                  },
+                  [_vm._v("Öğretmen Ekle")]
+                )
               ],
               1
             )
@@ -239,13 +366,81 @@ var render = function() {
                 staticClass: "d-flex align-items-center justify-content-between"
               },
               [
-                _c("CSelect", {
-                  staticStyle: { width: "100%" },
-                  attrs: {
-                    options: _vm.ogretmenler,
-                    placeholder: "Öğretmen Seçiniz"
-                  }
-                }),
+                _c(
+                  "div",
+                  { staticClass: "form-group", staticStyle: { width: "100%" } },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.selectedOgretmen,
+                            expression: "selectedOgretmen"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selectedOgretmen = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            function($event) {
+                              return _vm.getOgretmenInfo(_vm.selectedOgretmen)
+                            }
+                          ]
+                        }
+                      },
+                      [
+                        _vm.ogretmenler.length != 0
+                          ? _c(
+                              "option",
+                              {
+                                attrs: { selected: "", hidden: "" },
+                                domProps: { value: undefined }
+                              },
+                              [_vm._v("Seçiniz")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.ogretmenler.length == 0
+                          ? _c(
+                              "option",
+                              {
+                                attrs: { selected: "", hidden: "" },
+                                domProps: { value: undefined }
+                              },
+                              [_vm._v("Listelenecek öğretmen bulunamadı")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm._l(_vm.ogretmenler, function(ogretmen) {
+                          return _c(
+                            "option",
+                            {
+                              key: ogretmen.id,
+                              domProps: { value: ogretmen.id }
+                            },
+                            [_vm._v(_vm._s(ogretmen.ad))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "CButton",
@@ -255,9 +450,14 @@ var render = function() {
                       width: "150px",
                       "margin-left": "10px"
                     },
-                    attrs: { type: "submit", color: "danger" }
+                    attrs: { color: "danger" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteOgretmen()
+                      }
+                    }
                   },
-                  [_vm._v("\r\n                Öğretmeni Sil\r\n            ")]
+                  [_vm._v("\r\n              Öğretmeni Sil\r\n            ")]
                 )
               ],
               1
@@ -289,15 +489,14 @@ var render = function() {
                       _c(
                         "select",
                         { staticClass: "custom-select", attrs: { size: "4" } },
-                        [
-                          _c("option", { attrs: { selected: "" } }, [
-                            _vm._v("Görsel Programlama")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Bilgisayarlar ve Network")
-                          ])
-                        ]
+                        _vm._l(_vm.ogretmen.dersler, function(ders) {
+                          return _c(
+                            "option",
+                            { key: ders.id, domProps: { value: ders.id } },
+                            [_vm._v(_vm._s(ders.ad))]
+                          )
+                        }),
+                        0
                       ),
                       _vm._v(" "),
                       _c(
@@ -308,7 +507,10 @@ var render = function() {
                             { staticClass: "mt-2", attrs: { sm: "6" } },
                             [
                               _c("CInput", {
-                                attrs: { label: "Toplam Ders Saati" }
+                                attrs: {
+                                  label: "Toplam Ders Saati",
+                                  value: _vm.ogretmen.toplam_saat
+                                }
                               })
                             ],
                             1
@@ -409,6 +611,99 @@ var render = function() {
                 ],
                 1
               )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          attrs: { id: "createOgretmenForm" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.createOgretmen()
+            }
+          }
+        },
+        [
+          _c(
+            "CModal",
+            {
+              attrs: {
+                title: "Yeni Öğretmen",
+                size: "sm",
+                show: _vm.ogretmenEkleModal
+              },
+              on: {
+                "update:show": function($event) {
+                  _vm.ogretmenEkleModal = $event
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "footer",
+                  fn: function() {
+                    return [
+                      _c(
+                        "CButton",
+                        {
+                          attrs: { color: "secondary" },
+                          on: {
+                            click: function($event) {
+                              _vm.ogretmenEkleModal = false
+                            }
+                          }
+                        },
+                        [_vm._v("Vazgeç")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "CButton",
+                        {
+                          attrs: {
+                            form: "createOgretmenForm",
+                            type: "submit",
+                            color: "primary"
+                          }
+                        },
+                        [_vm._v("Kaydet")]
+                      )
+                    ]
+                  },
+                  proxy: true
+                }
+              ])
+            },
+            [
+              _c("CInput", {
+                attrs: {
+                  label: "Adı Soyadı",
+                  value: _vm.yeniOgretmen.ad,
+                  required: ""
+                },
+                on: {
+                  "update:value": function($event) {
+                    return _vm.$set(_vm.yeniOgretmen, "ad", $event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("CInput", {
+                attrs: {
+                  label: "Toplam Ders Saati",
+                  value: _vm.yeniOgretmen.toplamSaat,
+                  required: ""
+                },
+                on: {
+                  "update:value": function($event) {
+                    return _vm.$set(_vm.yeniOgretmen, "toplamSaat", $event)
+                  }
+                }
+              })
             ],
             1
           )

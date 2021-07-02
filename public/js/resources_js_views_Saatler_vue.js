@@ -133,11 +133,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -154,12 +149,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       errors: null,
       dismissSecs: 5,
-      dismissCountDown: 5
+      dismissCountDown: 5,
+      activeTab: null
     };
   },
   mounted: function mounted() {
-    this.ListSaatler();
-    this.ListGunler();
+    this.listSaatler();
+    this.listGunler();
   },
   methods: {
     createGun: function createGun() {
@@ -168,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/gunler', {
         gun: this.gunler
       }).then(function (response) {
-        _this.ListGunler();
+        _this.listGunler();
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
 
@@ -179,9 +175,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios["delete"]('/api/gunler').then(function (response) {
-        _this2.ListGunler();
+        _this2.listGunler();
 
-        _this2.ListSaatler();
+        _this2.listSaatler();
       })["catch"](function (error) {
         _this2.errors = error.response.data.errors;
 
@@ -205,10 +201,10 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.showAlert();
       }).then(function () {
-        _this3.ListSaatler();
+        _this3.listSaatler();
       });
     },
-    ListSaatler: function ListSaatler() {
+    listSaatler: function listSaatler() {
       var _this4 = this;
 
       axios.get('/api/saatler').then(function (response) {
@@ -217,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error.response.data);
       });
     },
-    ListGunler: function ListGunler() {
+    listGunler: function listGunler() {
       var _this5 = this;
 
       axios.get('/api/gunler').then(function (response) {
@@ -225,8 +221,10 @@ __webpack_require__.r(__webpack_exports__);
 
         if (response.status == 204) {
           _this5.kayitliGunler = false;
+          _this5.activeTab = 0;
         } else {
           _this5.kayitliGunler = true;
+          _this5.activeTab = 1;
           _this5.gunler = response.data;
         }
       })["catch"](function (error) {
@@ -241,10 +239,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -258,7 +256,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.form-check-input[data-v-5cdde0ae] {\r\n  position:unset!important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.form-check-input {\r\n  position:unset!important;\n}\nul.nav {\r\n  margin-bottom: 20px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -276,9 +274,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Saatler_vue_vue_type_template_id_5cdde0ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true& */ "./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true&");
+/* harmony import */ var _Saatler_vue_vue_type_template_id_5cdde0ae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Saatler.vue?vue&type=template&id=5cdde0ae& */ "./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&");
 /* harmony import */ var _Saatler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Saatler.vue?vue&type=script&lang=js& */ "./resources/js/views/Saatler.vue?vue&type=script&lang=js&");
-/* harmony import */ var _Saatler_vue_vue_type_style_index_0_id_5cdde0ae_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css& */ "./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css&");
+/* harmony import */ var _Saatler_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Saatler.vue?vue&type=style&index=0&lang=css& */ "./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -290,11 +288,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _Saatler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Saatler_vue_vue_type_template_id_5cdde0ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Saatler_vue_vue_type_template_id_5cdde0ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Saatler_vue_vue_type_template_id_5cdde0ae___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Saatler_vue_vue_type_template_id_5cdde0ae___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "5cdde0ae",
+  null,
   null
   
 )
@@ -322,44 +320,44 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae& ***!
+  \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_template_id_5cdde0ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_template_id_5cdde0ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_template_id_5cdde0ae___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_template_id_5cdde0ae___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_template_id_5cdde0ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_template_id_5cdde0ae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Saatler.vue?vue&type=template&id=5cdde0ae& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&");
 
 
 /***/ }),
 
-/***/ "./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_id_5cdde0ae_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader/index.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_id_5cdde0ae_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_id_5cdde0ae_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader/index.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Saatler.vue?vue&type=style&index=0&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_id_5cdde0ae_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_id_5cdde0ae_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Saatler_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
 /* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=template&id=5cdde0ae& ***!
+  \**************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -406,247 +404,295 @@ var render = function() {
                 "CCard",
                 [
                   _c("CCardHeader", [
-                    _vm._v("\r\n            Ders Günleri\r\n          ")
-                  ]),
-                  _vm._v(" "),
-                  _c("CCardBody", [
-                    _c(
-                      "form",
-                      {
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.createGun()
-                          }
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "table-responsive" }, [
-                          _vm.kayitliGunler == false
-                            ? _c(
-                                "table",
-                                {
-                                  staticClass: "table table-bordered table-sm",
-                                  staticStyle: { "border-top": "none" }
-                                },
-                                [
-                                  _c("tbody", [
-                                    _c(
-                                      "tr",
-                                      _vm._l(_vm.tumGunler, function(gun) {
-                                        return _c("td", { key: gun }, [
-                                          _c("div", { staticClass: "ml-4" }, [
-                                            _c("input", {
-                                              directives: [
-                                                {
-                                                  name: "model",
-                                                  rawName: "v-model",
-                                                  value: _vm.gunler[gun],
-                                                  expression: "gunler[gun]"
-                                                }
-                                              ],
-                                              staticClass: "form-check-input",
-                                              attrs: { type: "checkbox" },
-                                              domProps: {
-                                                checked: Array.isArray(
-                                                  _vm.gunler[gun]
-                                                )
-                                                  ? _vm._i(
-                                                      _vm.gunler[gun],
-                                                      null
-                                                    ) > -1
-                                                  : _vm.gunler[gun]
-                                              },
-                                              on: {
-                                                change: function($event) {
-                                                  var $$a = _vm.gunler[gun],
-                                                    $$el = $event.target,
-                                                    $$c = $$el.checked
-                                                      ? true
-                                                      : false
-                                                  if (Array.isArray($$a)) {
-                                                    var $$v = null,
-                                                      $$i = _vm._i($$a, $$v)
-                                                    if ($$el.checked) {
-                                                      $$i < 0 &&
-                                                        _vm.$set(
-                                                          _vm.gunler,
-                                                          gun,
-                                                          $$a.concat([$$v])
-                                                        )
-                                                    } else {
-                                                      $$i > -1 &&
-                                                        _vm.$set(
-                                                          _vm.gunler,
-                                                          gun,
-                                                          $$a
-                                                            .slice(0, $$i)
-                                                            .concat(
-                                                              $$a.slice($$i + 1)
-                                                            )
-                                                        )
-                                                    }
-                                                  } else {
-                                                    _vm.$set(
-                                                      _vm.gunler,
-                                                      gun,
-                                                      $$c
-                                                    )
-                                                  }
-                                                }
-                                              }
-                                            }),
-                                            _vm._v(" "),
-                                            _c(
-                                              "label",
-                                              {
-                                                staticClass: "form-check-label"
-                                              },
-                                              [_vm._v(" " + _vm._s(gun) + " ")]
-                                            )
-                                          ])
-                                        ])
-                                      }),
-                                      0
-                                    )
-                                  ])
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.kayitliGunler == true
-                            ? _c("span", [
-                                _vm._v(
-                                  "Eklenen günler tabloda listelenmektedir."
-                                )
-                              ])
-                            : _vm._e()
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "form-actions mt-3" },
-                          [
-                            _vm.kayitliGunler == false
-                              ? _c(
-                                  "CButton",
-                                  { attrs: { type: "submit", color: "info" } },
-                                  [
-                                    _vm._v(
-                                      "\r\n                Kaydet\r\n                "
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.kayitliGunler == true
-                              ? _c(
-                                  "CButton",
-                                  {
-                                    attrs: { color: "danger" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.resetGunler()
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\r\n                Sıfırla\r\n                "
-                                    )
-                                  ]
-                                )
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ]
+                    _vm._v(
+                      "\r\n            Ders Günleri ve Saatleri\r\n          "
                     )
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "CCard",
-                [
-                  _c("CCardHeader", [
-                    _vm._v("\r\n            Ders Saatleri\r\n          ")
                   ]),
                   _vm._v(" "),
-                  _c("CCardBody", [
-                    _c(
-                      "form",
-                      {
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.createSaat()
-                          }
-                        }
-                      },
-                      [
-                        _c("CSelect", {
+                  _c(
+                    "CCardBody",
+                    [
+                      _c(
+                        "CTabs",
+                        {
                           attrs: {
-                            label: "Öğretim",
-                            horizontal: "",
-                            options: _vm.ogretim,
-                            placeholder: "Seçiniz",
-                            value: _vm.saat.ogretim
+                            variant: "pills",
+                            "active-tab": _vm.activeTab
                           },
                           on: {
-                            "update:value": function($event) {
-                              return _vm.$set(_vm.saat, "ogretim", $event)
+                            "update:activeTab": function($event) {
+                              _vm.activeTab = $event
+                            },
+                            "update:active-tab": function($event) {
+                              _vm.activeTab = $event
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("CInput", {
-                          attrs: {
-                            label: "Ders Başlangıcı",
-                            horizontal: "",
-                            type: "time"
-                          },
-                          model: {
-                            value: _vm.saat.baslangic,
-                            callback: function($$v) {
-                              _vm.$set(_vm.saat, "baslangic", $$v)
-                            },
-                            expression: "saat.baslangic"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("CInput", {
-                          attrs: {
-                            label: "Ders Bitişi",
-                            horizontal: "",
-                            type: "time"
-                          },
-                          model: {
-                            value: _vm.saat.bitis,
-                            callback: function($$v) {
-                              _vm.$set(_vm.saat, "bitis", $$v)
-                            },
-                            expression: "saat.bitis"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "form-actions" },
-                          [
+                        },
+                        [
+                          _c("CTab", { attrs: { title: "Ders Günleri" } }, [
                             _c(
-                              "CButton",
-                              { attrs: { type: "submit", color: "info" } },
-                              [_vm._v("Ekle")]
+                              "form",
+                              {
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.createGun()
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "table-responsive" }, [
+                                  _vm.kayitliGunler == false
+                                    ? _c(
+                                        "table",
+                                        {
+                                          staticClass:
+                                            "table table-bordered table-sm",
+                                          staticStyle: { "border-top": "none" }
+                                        },
+                                        [
+                                          _c("tbody", [
+                                            _c(
+                                              "tr",
+                                              _vm._l(_vm.tumGunler, function(
+                                                gun
+                                              ) {
+                                                return _c("td", { key: gun }, [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "ml-4" },
+                                                    [
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.gunler[gun],
+                                                            expression:
+                                                              "gunler[gun]"
+                                                          }
+                                                        ],
+                                                        staticClass:
+                                                          "form-check-input",
+                                                        attrs: {
+                                                          type: "checkbox"
+                                                        },
+                                                        domProps: {
+                                                          checked: Array.isArray(
+                                                            _vm.gunler[gun]
+                                                          )
+                                                            ? _vm._i(
+                                                                _vm.gunler[gun],
+                                                                null
+                                                              ) > -1
+                                                            : _vm.gunler[gun]
+                                                        },
+                                                        on: {
+                                                          change: function(
+                                                            $event
+                                                          ) {
+                                                            var $$a =
+                                                                _vm.gunler[gun],
+                                                              $$el =
+                                                                $event.target,
+                                                              $$c = $$el.checked
+                                                                ? true
+                                                                : false
+                                                            if (
+                                                              Array.isArray($$a)
+                                                            ) {
+                                                              var $$v = null,
+                                                                $$i = _vm._i(
+                                                                  $$a,
+                                                                  $$v
+                                                                )
+                                                              if (
+                                                                $$el.checked
+                                                              ) {
+                                                                $$i < 0 &&
+                                                                  _vm.$set(
+                                                                    _vm.gunler,
+                                                                    gun,
+                                                                    $$a.concat([
+                                                                      $$v
+                                                                    ])
+                                                                  )
+                                                              } else {
+                                                                $$i > -1 &&
+                                                                  _vm.$set(
+                                                                    _vm.gunler,
+                                                                    gun,
+                                                                    $$a
+                                                                      .slice(
+                                                                        0,
+                                                                        $$i
+                                                                      )
+                                                                      .concat(
+                                                                        $$a.slice(
+                                                                          $$i +
+                                                                            1
+                                                                        )
+                                                                      )
+                                                                  )
+                                                              }
+                                                            } else {
+                                                              _vm.$set(
+                                                                _vm.gunler,
+                                                                gun,
+                                                                $$c
+                                                              )
+                                                            }
+                                                          }
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "label",
+                                                        {
+                                                          staticClass:
+                                                            "form-check-label"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            " " +
+                                                              _vm._s(gun) +
+                                                              " "
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              }),
+                                              0
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.kayitliGunler == true
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "Eklenen günler tabloda listelenmektedir."
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-actions mt-3" },
+                                  [
+                                    _vm.kayitliGunler == false
+                                      ? _c(
+                                          "CButton",
+                                          {
+                                            attrs: {
+                                              type: "submit",
+                                              color: "info"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\r\n                Kaydet\r\n                "
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ],
+                                  1
+                                )
+                              ]
                             )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ])
+                          ]),
+                          _vm._v(" "),
+                          _c("CTab", { attrs: { title: "Ders Saatleri" } }, [
+                            _c(
+                              "form",
+                              {
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.createSaat()
+                                  }
+                                }
+                              },
+                              [
+                                _c("CSelect", {
+                                  attrs: {
+                                    label: "Öğretim",
+                                    horizontal: "",
+                                    options: _vm.ogretim,
+                                    placeholder: "Seçiniz",
+                                    value: _vm.saat.ogretim
+                                  },
+                                  on: {
+                                    "update:value": function($event) {
+                                      return _vm.$set(
+                                        _vm.saat,
+                                        "ogretim",
+                                        $event
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("CInput", {
+                                  attrs: {
+                                    label: "Ders Başlangıcı",
+                                    horizontal: "",
+                                    type: "time"
+                                  },
+                                  model: {
+                                    value: _vm.saat.baslangic,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.saat, "baslangic", $$v)
+                                    },
+                                    expression: "saat.baslangic"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("CInput", {
+                                  attrs: {
+                                    label: "Ders Bitişi",
+                                    horizontal: "",
+                                    type: "time"
+                                  },
+                                  model: {
+                                    value: _vm.saat.bitis,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.saat, "bitis", $$v)
+                                    },
+                                    expression: "saat.bitis"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-actions" },
+                                  [
+                                    _c(
+                                      "CButton",
+                                      {
+                                        attrs: { type: "submit", color: "info" }
+                                      },
+                                      [_vm._v("Ekle")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -663,7 +709,26 @@ var render = function() {
                 [
                   _c("CCardHeader", [
                     _vm._v(
-                      "\r\n            Eklenen Ders Saatleri\r\n          "
+                      "\r\n            Eklenen Ders Saatleri\r\n            "
+                    ),
+                    _c(
+                      "div",
+                      { staticClass: "card-header-actions" },
+                      [
+                        _c(
+                          "CButton",
+                          {
+                            attrs: { type: "submit", color: "dark" },
+                            on: {
+                              click: function($event) {
+                                return _vm.resetGunler()
+                              }
+                            }
+                          },
+                          [_vm._v("Sıfırla")]
+                        )
+                      ],
+                      1
                     )
                   ]),
                   _vm._v(" "),
@@ -794,22 +859,22 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&id=5cdde0ae&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Saatler.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/Saatler.vue?vue&type=style&index=0&lang=css&");
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.id, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! !../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
-var update = add("44aa3f02", content, false, {});
+var update = add("eb4fae66", content, false, {});
 // Hot Module Replacement
 if(false) {}
 

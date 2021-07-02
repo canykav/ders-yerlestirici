@@ -32,15 +32,15 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Dersler',
-        to: '/dersler',
-        icon: 'cil-book'
-      },
-      {
-        _name: 'CSidebarNavItem',
         name: 'Derslikler',
         to: '/derslikler',
         icon: 'cil-room'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Dersler',
+        to: '/dersler',
+        icon: 'cil-book'
       },
       {
         _name: 'CSidebarNavItem',
@@ -48,8 +48,6 @@ export default [
         to: '/program',
         icon: 'cil-spreadsheet'
       },
-      
-
     ]
   }
 ]

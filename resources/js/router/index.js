@@ -94,14 +94,14 @@ function configRoutes () {
           component: Bolumler
         },
         {
-          path: 'dersler',
-          name: 'Dersler',
-          component: Dersler
-        },
-        {
           path: 'derslikler',
           name: 'Derslikler',
           component: Derslikler
+        },
+        {
+          path: 'dersler',
+          name: 'Dersler',
+          component: Dersler
         },
         {
           path: 'ogretmenler',

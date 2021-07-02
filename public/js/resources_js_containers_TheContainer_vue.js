@@ -117,6 +117,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'TheHeader',
@@ -285,14 +286,14 @@ __webpack_require__.r(__webpack_exports__);
     icon: 'cil-school'
   }, {
     _name: 'CSidebarNavItem',
-    name: 'Dersler',
-    to: '/dersler',
-    icon: 'cil-book'
-  }, {
-    _name: 'CSidebarNavItem',
     name: 'Derslikler',
     to: '/derslikler',
     icon: 'cil-room'
+  }, {
+    _name: 'CSidebarNavItem',
+    name: 'Dersler',
+    to: '/dersler',
+    icon: 'cil-book'
   }, {
     _name: 'CSidebarNavItem',
     name: 'Ders Programı',
@@ -368,7 +369,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.c-sidebar {\n  background: #2e394c;\n}\n.c-sidebar .c-sidebar-nav-link:hover, .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {\n  background: #1d70ec;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.c-sidebar {\n  background: #2e394c;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -935,8 +936,12 @@ var render = function() {
       _c(
         "CHeaderBrand",
         { staticClass: "mx-auto d-lg-none", attrs: { to: "/" } },
-        [_c("CIcon", { attrs: { name: "logo", height: "48", alt: "Logo" } })],
-        1
+        [
+          _c("img", {
+            staticClass: "c-sidebar-brand-full",
+            attrs: { src: "/img/logo_dark.png", height: "40px" }
+          })
+        ]
       ),
       _vm._v(" "),
       _c(
