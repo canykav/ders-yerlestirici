@@ -141,11 +141,7 @@ export default {
           });
     },
     deleteOgretmen() {
-       axios.delete('/api/ogretmenler', {
-         params: {
-           id: this.selectedOgretmen
-         }
-       })
+       axios.delete('/api/ogretmenler/'+this.selectedOgretmen)
           .then(response => {
               this.listOgretmenler();
               this.message = 'Öğretmen başarıyla silindi.';

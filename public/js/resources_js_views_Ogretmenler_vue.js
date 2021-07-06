@@ -155,11 +155,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteOgretmen: function deleteOgretmen() {
       var _this2 = this;
 
-      axios["delete"]('/api/ogretmenler', {
-        params: {
-          id: this.selectedOgretmen
-        }
-      }).then(function (response) {
+      axios["delete"]('/api/ogretmenler/' + this.selectedOgretmen).then(function (response) {
         _this2.listOgretmenler();
 
         _this2.message = 'Öğretmen başarıyla silindi.';

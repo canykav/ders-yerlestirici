@@ -32,8 +32,8 @@ class OgretmenController extends Controller
         //
     }
 
-    public function destroy(Request $req)
+    public function destroy($ogretmen_id)
     {
-        ogretmen::find($req->id)->delete();
+        ogretmen::findOrFail($ogretmen_id)->delete();
     }
 }
