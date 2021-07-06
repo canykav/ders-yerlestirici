@@ -44,6 +44,7 @@
                 <CInput
                   label="Toplam Ders Saati"
                   :value="ogretmen.toplam_saat"
+                  readonly
                 />
               </CCol>
                 <CCol sm="6" class="mt-2">
@@ -81,18 +82,6 @@
       <td>Otto</td>
       <td>@mdo</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
   </tbody>
 </table>
        </CCardBody>
@@ -111,11 +100,6 @@
               label="Adı Soyadı"
               :value.sync="yeniOgretmen.ad"
               required
-            />
-            <CInput
-                label="Toplam Ders Saati"
-                :value.sync="yeniOgretmen.toplamSaat"
-                required
             />
               <template #footer>
           <CButton @click="ogretmenEkleModal = false" color="secondary">Vazgeç</CButton>
@@ -174,7 +158,6 @@ export default {
     createOgretmen(){
       axios.post('/api/ogretmenler', {
         ad: this.yeniOgretmen.ad,
-        toplam_saat: this.yeniOgretmen.toplamSaat,
       })
           .then(response => {
               this.listOgretmenler();

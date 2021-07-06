@@ -26,22 +26,23 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Bölümler',
-        to: '/bolumler',
-        icon: 'cil-school'
-      },
-      {
-        _name: 'CSidebarNavItem',
         name: 'Derslikler',
         to: '/derslikler',
         icon: 'cil-room'
       },
       {
         _name: 'CSidebarNavItem',
+        name: 'Bölümler ve Dersler',
+        to: '/bolumler',
+        icon: 'cil-school'
+      },
+
+      /*{
+        _name: 'CSidebarNavItem',
         name: 'Dersler',
         to: '/dersler',
         icon: 'cil-book'
-      },
+      },*/
       {
         _name: 'CSidebarNavItem',
         name: 'Ders Programı',

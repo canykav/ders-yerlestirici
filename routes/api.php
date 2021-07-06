@@ -7,6 +7,7 @@ use App\Http\Controllers\GunController;
 use App\Http\Controllers\OgretmenController;
 use App\Http\Controllers\DerslikController;
 use App\Http\Controllers\BolumController;
+use App\Http\Controllers\DersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,7 @@ Route::prefix('/ogretmenler')->group(function () {
     Route::post('/', [OgretmenController::class, 'store']);
     Route::put('/{ogretmen_id}', [OgretmenController::class, 'update']);
     Route::get('/{ogretmen_id}', [OgretmenController::class, 'show']);
-    Route::delete('/', [OgretmenController::class, 'destroy']);
+    Route::delete('/{ogretmen_id}', [OgretmenController::class, 'destroy']);
 });
 
 Route::prefix('/bolumler')->group(function () {
@@ -52,7 +53,15 @@ Route::prefix('/bolumler')->group(function () {
     Route::post('/', [BolumController::class, 'store']);
     Route::put('/{bolum_id}', [BolumController::class, 'update']);
     Route::get('/{bolum_id}', [BolumController::class, 'show']);
-    Route::delete('/', [BolumController::class, 'destroy']);
+    Route::delete('/{bolum_id}', [BolumController::class, 'destroy']);
+});
+
+Route::prefix('/dersler')->group(function () {
+    Route::get('/', [DersController::class, 'index']);
+    Route::post('/', [DersController::class, 'store']);
+    Route::put('/{ders_id}', [DersController::class, 'update']);
+    Route::get('/{ders_id}', [DersController::class, 'show']);
+    Route::delete('/{ders_id}', [DersController::class, 'destroy']);
 });
 
 Route::prefix('/derslikler')->group(function () {
@@ -60,5 +69,5 @@ Route::prefix('/derslikler')->group(function () {
     Route::post('/', [DerslikController::class, 'store']);
     Route::put('/{derslik_id}', [DerslikController::class, 'update']);
     Route::get('/{derslik_id}', [DerslikController::class, 'show']);
-    Route::delete('/', [DerslikController::class, 'destroy']);
+    Route::delete('/{derslik_id}', [DerslikController::class, 'destroy']);
 });

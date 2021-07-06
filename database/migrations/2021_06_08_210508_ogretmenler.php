@@ -16,7 +16,6 @@ class Ogretmenler extends Migration
         Schema::create('ogretmenler', function(Blueprint $table) {
             $table->id();
             $table->string('ad');
-            $table->integer('toplam_saat');
         });
     }
 

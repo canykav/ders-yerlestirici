@@ -1,8 +1,8 @@
 <template>
 <div>
-              <CAlert :show.sync="dismissCountDown" closeButton color="success">
-              {{message}}
-            </CAlert>
+      <CAlert :show.sync="dismissCountDown" closeButton color="success">
+        {{message}}
+      </CAlert>
                <CRow>
       <CCol sm="6">
         <CCard>
@@ -13,7 +13,8 @@
             </div>
           </CCardHeader>
           <CCardBody>
-<table class="table table-bordered table-hover">
+            <div class="table-responsive">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">Bölüm Adı</th>
@@ -22,21 +23,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr  v-for="bolum in bolumler" :key="bolum.id">
+    <tr  v-for="bolum in bolumler" :key="bolum.id" v-bind:id="'bolum-'+bolum.id">
       <td>{{bolum.ad}}</td>
       <td>{{bolum.ogretim}}</td>
       <td>
         <CButtonGroup>
-          <CButton type="submit" color="dark" title="Seç ve Görüntüle"><CIcon :content="$options.zoom"/></CButton>
-          <CButton type="submit" color="info" title="Düzenle"><CIcon name="cil-pencil"/></CButton>
-          <CButton type="submit" color="danger" title="Sil"><CIcon :content="$options.trash"/></CButton>
+          <CButton type="submit" color="dark" title="Seç ve Görüntüle" @click="listBolumDersleri(bolum.id)"><CIcon :content="$options.zoom"/></CButton>
+          <CButton type="submit" color="info" title="Düzenle" @click="showBolumDuzenleModal(bolum)"><CIcon name="cil-pencil"/></CButton>
+          <CButton type="submit" color="danger" title="Sil" @click="showBolumSilModal(bolum)"><CIcon :content="$options.trash"/></CButton>
         </CButtonGroup>
       </td>
     </tr>
   </tbody>
 </table>
-
-          
+</div>
           </CCardBody>
         </CCard>
       </CCol>
@@ -44,14 +44,18 @@
       <CCol sm="6">
         <CCard>
           <CCardHeader>
-            Seçili Bölüme Ait Dersler
-            <div class="card-header-actions">
-              <CButton type="submit" color="dark">Bölüme Ders Ekle</CButton>
+            Bölüm Dersleri
+            <div class="card-header-actions" v-if="selectedBolum!=null">
+              <CButton type="submit" color="dark" @click="dersEkleModal=true;">Bölüme Ders Ekle</CButton>
             </div>
           </CCardHeader>
           <CCardBody>
-
-<table class="table table-bordered table-hover">
+          <CAlert v-if="selectedBolum==null" show color="primary" class="d-flex flex-column justify-content-center align-items-center">
+            <CIcon :content="$options.zoom" height="42px" class="mb-1"/>
+            Seçtiğiniz bölümün dersleri burada görüntülecektir.
+          </CAlert>
+<div class="table-responsive" v-if="selectedBolum!=null">
+<table class="table table-bordered" v-if="selectedBolumContent.length>0">
   <thead>
     <tr>
       <th scope="col">Ders Kodu</th>
@@ -63,12 +67,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>1</th>
-      <td>Veri Tabanı</td>
-      <td>4</td>
-      <td>0</td>
-      <td>Nurcan Seylan</td>
+    <tr v-for="ders in selectedBolumContent">
+      <td>{{ders.kod}}</td>
+      <td>{{ders.ad}}</td>
+      <td>{{ders.teorik}}</td>
+      <td>{{ders.lab}}</td>
+      <td>{{ders.ogretmen_adi}}</td>
       <td>
         <CButtonGroup>
           <CButton type="submit" color="info"><CIcon name="cil-pencil"/></CButton>
@@ -76,38 +80,16 @@
         </CButtonGroup>
       </td>      
     </tr>
-    <tr>
-      <th>1</th>
-      <td>Veri Tabanı</td>
-      <td>4</td>
-      <td>0</td>
-      <td>Nurcan Seylan</td>
-      <td>
-        <CButtonGroup>
-          <CButton type="submit" color="info"><CIcon name="cil-pencil"/></CButton>
-          <CButton type="submit" color="danger"><CIcon :content="$options.trash"/></CButton>
-        </CButtonGroup>
-      </td> 
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Veri Tabanı</td>
-      <td>4</td>
-      <td>0</td>
-      <td>Nurcan Seylan</td>
-      <td>
-        <CButtonGroup>
-          <CButton type="submit" color="info"><CIcon name="cil-pencil"/></CButton>
-          <CButton type="submit" color="danger"><CIcon :content="$options.trash"/></CButton>
-        </CButtonGroup>
-      </td> 
-    </tr>
   </tbody>
 </table>
+          <CAlert v-if="selectedBolumContent.length==0" show color="dark" class="d-flex flex-column justify-content-center align-items-center">
+            <CIcon :content="$options.sad" height="42px" class="mb-1"/>
+            Seçtiğiniz bölüme ait ders bulunamadı.
+          </CAlert>
+</div>
        </CCardBody>
         </CCard>
       </CCol>
-
     </CRow>
 
       <form @submit.prevent="createBolum()" id="createBolumForm">
@@ -134,22 +116,131 @@
       </template>
     </CModal>
     </form>
+
+      <form @submit.prevent="createDers()" id="createDersForm">
+      <CModal
+        title="Yeni Ders"
+        size="sm"
+        :show.sync="dersEkleModal"
+      >
+                <CInput
+            label="Ders Kodu"
+            :value.sync="yeniDers.kod"
+            required
+          />
+          <CInput
+            label="Ders Adı"
+            :value.sync="yeniDers.ad"
+            required
+          />
+          <div class="form-group">
+            <label>Öğretmen</label>
+            <select class="form-control" v-model="yeniDers.ogretmen" required>
+              <option v-if="ogretmenler.length!=0" :value="undefined" selected hidden>Seçiniz</option>
+              <option v-if="ogretmenler.length==0" :value="undefined" selected hidden>Listelenecek öğretmen bulunamadı</option>
+              <option v-for="ogretmen in ogretmenler" :key="ogretmen.id" :value="ogretmen.id">{{ogretmen.ad}}</option>
+            </select>
+          </div>
+          <CInput
+            label="Teorik Ders saati"
+            type="number"
+            :value.sync="yeniDers.teorik"
+            required
+          />
+          <div class="form-group">
+            <label>Teorik Dersliği</label>
+            <select class="form-control" v-model="yeniDers.teorik_derslik">
+              <option v-if="derslikler['sinif'].length!=0" :value="undefined" selected hidden>Seçiniz</option>
+              <option v-if="derslikler['sinif'].length==0" :value="undefined" selected hidden>Listelenecek derslik bulunamadı</option>
+              <option v-for="derslik in derslikler['sinif']" :key="derslik.id" :value="derslik.id">{{derslik.ad}}</option>
+            </select>
+          </div>
+          <CInput
+            label="Laboratuvar Ders saati"
+            type="number"
+            :value.sync="yeniDers.lab"
+            required
+          />
+          <div class="form-group">
+            <label>Laboratuvar Dersliği</label>
+            <select class="form-control" v-model="yeniDers.lab_derslik">
+              <option v-if="derslikler['laboratuvar'].length!=0" :value="undefined" selected hidden>Seçiniz</option>
+              <option v-if="derslikler['laboratuvar'].length==0" :value="undefined" selected hidden>Listelenecek derslik bulunamadı</option>
+              <option v-for="derslik in derslikler['laboratuvar']" :key="derslik.id" :value="derslik.id">{{derslik.ad}}</option>
+            </select>
+          </div>
+      <template #footer>
+        <CButton @click="dersEkleModal = false" color="secondary">Vazgeç</CButton>
+        <CButton form="createDersForm" type="submit" color="primary">Kaydet</CButton>
+      </template>
+    </CModal>
+    </form>
+
+ <form @submit.prevent="updateBolum()" id="updateBolumForm">
+      <CModal
+        title="Bölüm Düzenleme"
+        size="sm"
+        :show.sync="bolumDuzenleModal"
+      >
+      <CInput
+        label="Bölüm Adı"
+        :value.sync="processedBolum.ad"
+        required
+      />
+      <CSelect
+        label="Öğretim"
+        :options="['Örgün Öğretim', 'İkinci Öğretim']"
+        placeholder="Seçiniz"
+        :value.sync="processedBolum.ogretim"
+        required
+      />
+      <template #footer>
+        <CButton @click="bolumDuzenleModal = false" color="secondary">Vazgeç</CButton>
+        <CButton form="updateBolumForm" type="submit" color="primary">Kaydet</CButton>
+      </template>
+    </CModal>
+    </form>
+
+     <form @submit.prevent="deleteBolum()" id="deleteBolumForm">
+      <CModal
+        title="Bölüm Silme"
+        size="sm"
+        color="danger"
+        :show.sync="bolumSilModal"
+      >
+         {{processedBolum.ad}} ({{processedBolum.ogretim}}) Bölümü dersleriyle beraber silinecektir. Emin misiniz?
+      <template #footer>
+        <CButton @click="bolumSilModal = false" color="secondary">Vazgeç</CButton>
+        <CButton form="deleteBolumForm" type="submit" color="danger">Sil</CButton>
+      </template>
+    </CModal>
+    </form>
     </div>
 </template>
 
 <script>
 import CTableWrapper from './base/Table.vue'
 import usersData from './users/UsersData'
-import { cilTrash, cilZoom } from '@coreui/icons'
+import { cilTrash, cilZoom, cilSad } from '@coreui/icons'
 export default {
   trash: cilTrash,
   zoom: cilZoom,
+  sad: cilSad,
   components: { CTableWrapper },
   data(){
       return {
           bolumEkleModal: false,
+          dersEkleModal: false,
+          bolumDuzenleModal: false,
+          bolumSilModal: false,
+          selectedBolum: null,
+          processedBolum: {},
+          selectedBolumContent: {},
+          ogretmenler: null,
+          derslikler: null,
           bolumler: {},
           yeniBolum: {},
+          yeniDers: {},
           message: null,
           dismissSecs: 5,
           dismissCountDown: 0,
@@ -157,6 +248,8 @@ export default {
   },
   mounted() {
     this.listBolumler();
+    this.listOgretmenler();
+    this.listDerslikler();
   },
   methods: {
     createBolum(){
@@ -175,7 +268,7 @@ export default {
             console.log(error.response.data);
           });      
     },
-      listBolumler() {
+    listBolumler() {
       axios.get('/api/bolumler')
           .then(response => {
               this.bolumler = response.data.data;
@@ -184,9 +277,108 @@ export default {
             console.log(error.response.data);
           });
     },
+    listOgretmenler() {
+      axios.get('/api/ogretmenler')
+          .then(response => {
+              this.ogretmenler = response.data.data;
+          })
+          .catch(error => {
+            console.log(error.response.data);
+          });
+    },
+    listDerslikler() {
+      axios.get('/api/derslikler', {
+        params: {
+          seperate: 1
+        }
+      })
+      .then(response => {
+          this.derslikler = response.data.data;
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },
     showAlert(){
       this.dismissCountDown = this.dismissSecs;
-    }
+    },
+    showBolumDuzenleModal(bolum){
+      Object.assign(this.processedBolum, bolum);
+      this.bolumDuzenleModal=true;
+    },
+    updateBolum(){
+      axios.put('/api/bolumler/'+this.processedBolum.id, {
+        ad: this.processedBolum.ad,
+        ogretim: this.processedBolum.ogretim
+      })
+      .then(response => {
+          this.listBolumler();
+          this.bolumDuzenleModal=false;
+          this.processedBolum = {};
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },
+    showBolumSilModal(bolum){
+      Object.assign(this.processedBolum, bolum);
+      this.bolumSilModal=true;
+    },
+    deleteBolum(){
+      axios.delete('/api/bolumler/'+this.processedBolum.id)
+      .then(response => {
+        this.listBolumler();
+        this.bolumSilModal=false;
+        if(this.processedBolum.id==this.selectedBolum) {
+          this.selectedBolum = null;
+          this.selectedBolumContent= null;
+        }
+        this.processedBolum = {};    
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },
+    listBolumDersleri(bolum){
+      if(this.selectedBolum){
+        document.getElementById('bolum-'+this.selectedBolum).style.backgroundColor = "#ffffff";
+      }
+      document.getElementById('bolum-'+bolum).style.backgroundColor = "#00001513";
+      this.selectedBolum = bolum;
+      axios.get('/api/dersler/', {
+        params: {
+          bolum: bolum
+        }
+      })
+      .then(response => {
+          this.selectedBolumContent = response.data.data;
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },
+    createDers(){
+      axios.post('/api/dersler', {
+        bolum: this.selectedBolum,
+        kod: this.yeniDers.kod,
+        ad: this.yeniDers.ad,
+        ogretmen: this.yeniDers.ogretmen,
+        teorik: this.yeniDers.teorik,
+        teorik_derslik: this.yeniDers.teorik_derslik,
+        lab: this.yeniDers.lab,
+        lab_derslik: this.yeniDers.lab_derslik,
+      })
+      .then(response => {
+          this.dersEkleModal=false;
+          this.listBolumDersleri(this.selectedBolum);
+          this.message = 'Ders başarıyla eklendi.';
+          this.showAlert();
+          this.yeniDers = {};
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },
   }
 }
 </script>

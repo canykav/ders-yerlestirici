@@ -259,31 +259,13 @@ var render = function() {
           _c(
             "CCardBody",
             [
-              _c(
-                "CButton",
-                {
-                  attrs: { color: "info" },
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteOgretmen()
-                    }
-                  }
-                },
-                [_vm._v("\r\n              Tamamlama Kontrolü\r\n            ")]
-              ),
+              _c("CButton", { attrs: { color: "info" } }, [
+                _vm._v("\r\n              Tamamlama Kontrolü\r\n            ")
+              ]),
               _vm._v(" "),
-              _c(
-                "CButton",
-                {
-                  attrs: { color: "danger" },
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteOgretmen()
-                    }
-                  }
-                },
-                [_vm._v("\r\n              Otomatik Yerleştir\r\n            ")]
-              )
+              _c("CButton", { attrs: { color: "danger" } }, [
+                _vm._v("\r\n              Otomatik Yerleştir\r\n            ")
+              ])
             ],
             1
           )

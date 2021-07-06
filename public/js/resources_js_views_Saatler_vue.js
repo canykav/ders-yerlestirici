@@ -131,8 +131,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -217,8 +215,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       axios.get('/api/gunler').then(function (response) {
-        console.log(response);
-
         if (response.status == 204) {
           _this5.kayitliGunler = false;
           _this5.activeTab = 0;
@@ -476,7 +472,9 @@ var render = function() {
                                                         staticClass:
                                                           "form-check-input",
                                                         attrs: {
-                                                          type: "checkbox"
+                                                          type: "checkbox",
+                                                          id: gun,
+                                                          role: "button"
                                                         },
                                                         domProps: {
                                                           checked: Array.isArray(
@@ -551,7 +549,11 @@ var render = function() {
                                                         "label",
                                                         {
                                                           staticClass:
-                                                            "form-check-label"
+                                                            "form-check-label",
+                                                          attrs: {
+                                                            for: gun,
+                                                            role: "button"
+                                                          }
                                                         },
                                                         [
                                                           _vm._v(
@@ -733,110 +735,115 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("CCardBody", [
-                    _c("table", { staticClass: "table table-bordered" }, [
-                      _c("thead", [
+                    _c("div", { staticClass: "table-responsive" }, [
+                      _c("table", { staticClass: "table table-bordered" }, [
+                        _c("thead", [
+                          _c(
+                            "tr",
+                            [
+                              _c("th", [_vm._v("#")]),
+                              _vm._v(" "),
+                              _vm._l(_vm.gunler, function(gun) {
+                                return _c(
+                                  "th",
+                                  { key: gun.id, attrs: { scope: "col" } },
+                                  [_vm._v(_vm._s(gun.gun))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
                         _c(
-                          "tr",
-                          [
-                            _c("th", [_vm._v("#")]),
-                            _vm._v(" "),
-                            _vm._l(_vm.gunler, function(gun) {
-                              return _c(
-                                "th",
-                                { key: gun.id, attrs: { scope: "col" } },
-                                [_vm._v(_vm._s(gun.gun))]
-                              )
-                            })
-                          ],
-                          2
+                          "tbody",
+                          _vm._l(_vm.gunlerVeSaatler, function(
+                            saat,
+                            saatIndex
+                          ) {
+                            return _c("tr", [
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(saat.baslangic) +
+                                    " - " +
+                                    _vm._s(saat.bitis)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              saat[0] != null
+                                ? _c("td", {
+                                    class: {
+                                      "bg-success": saat[0] != 0,
+                                      "bg-danger": saat[0] == 0
+                                    },
+                                    attrs: { value: saat[0] }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              saat[1] != null
+                                ? _c("td", {
+                                    class: {
+                                      "bg-success": saat[1] != 0,
+                                      "bg-danger": saat[1] == 0
+                                    },
+                                    attrs: { value: saat[1] }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              saat[2] != null
+                                ? _c("td", {
+                                    class: {
+                                      "bg-success": saat[2] != 0,
+                                      "bg-danger": saat[2] == 0
+                                    },
+                                    attrs: { value: saat[2] }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              saat[3] != null
+                                ? _c("td", {
+                                    class: {
+                                      "bg-success": saat[3] != 0,
+                                      "bg-danger": saat[3] == 0
+                                    },
+                                    attrs: { value: saat[3] }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              saat[4] != null
+                                ? _c("td", {
+                                    class: {
+                                      "bg-success": saat[4] != 0,
+                                      "bg-danger": saat[4] == 0
+                                    },
+                                    attrs: { value: saat[4] }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              saat[5] != null
+                                ? _c("td", {
+                                    class: {
+                                      "bg-success": saat[5] != 0,
+                                      "bg-danger": saat[5] == 0
+                                    },
+                                    attrs: { value: saat[5] }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              saat[6] != null
+                                ? _c("td", {
+                                    class: {
+                                      "bg-success": saat[6] != 0,
+                                      "bg-danger": saat[6] == 0
+                                    },
+                                    attrs: { value: saat[6] }
+                                  })
+                                : _vm._e()
+                            ])
+                          }),
+                          0
                         )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        _vm._l(_vm.gunlerVeSaatler, function(saat, saatIndex) {
-                          return _c("tr", [
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(saat.baslangic) +
-                                  " - " +
-                                  _vm._s(saat.bitis)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            saat[0] != null
-                              ? _c("td", {
-                                  class: {
-                                    "bg-success": saat[0] != 0,
-                                    "bg-danger": saat[0] == 0
-                                  },
-                                  attrs: { value: saat[0] }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            saat[1] != null
-                              ? _c("td", {
-                                  class: {
-                                    "bg-success": saat[1] != 0,
-                                    "bg-danger": saat[1] == 0
-                                  },
-                                  attrs: { value: saat[1] }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            saat[2] != null
-                              ? _c("td", {
-                                  class: {
-                                    "bg-success": saat[2] != 0,
-                                    "bg-danger": saat[2] == 0
-                                  },
-                                  attrs: { value: saat[2] }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            saat[3] != null
-                              ? _c("td", {
-                                  class: {
-                                    "bg-success": saat[3] != 0,
-                                    "bg-danger": saat[3] == 0
-                                  },
-                                  attrs: { value: saat[3] }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            saat[4] != null
-                              ? _c("td", {
-                                  class: {
-                                    "bg-success": saat[4] != 0,
-                                    "bg-danger": saat[4] == 0
-                                  },
-                                  attrs: { value: saat[4] }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            saat[5] != null
-                              ? _c("td", {
-                                  class: {
-                                    "bg-success": saat[5] != 0,
-                                    "bg-danger": saat[5] == 0
-                                  },
-                                  attrs: { value: saat[5] }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            saat[6] != null
-                              ? _c("td", {
-                                  class: {
-                                    "bg-success": saat[6] != 0,
-                                    "bg-danger": saat[6] == 0
-                                  },
-                                  attrs: { value: saat[6] }
-                                })
-                              : _vm._e()
-                          ])
-                        }),
-                        0
-                      )
+                      ])
                     ])
                   ])
                 ],

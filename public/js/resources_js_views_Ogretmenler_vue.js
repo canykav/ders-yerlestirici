@@ -124,22 +124,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -189,8 +173,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.post('/api/ogretmenler', {
-        ad: this.yeniOgretmen.ad,
-        toplam_saat: this.yeniOgretmen.toplamSaat
+        ad: this.yeniOgretmen.ad
       }).then(function (response) {
         _this3.listOgretmenler();
 
@@ -509,7 +492,8 @@ var render = function() {
                               _c("CInput", {
                                 attrs: {
                                   label: "Toplam Ders Saati",
-                                  value: _vm.ogretmen.toplam_saat
+                                  value: _vm.ogretmen.toplam_saat,
+                                  readonly: ""
                                 }
                               })
                             ],
@@ -584,26 +568,6 @@ var render = function() {
                           _c("td", [_vm._v("Otto")]),
                           _vm._v(" "),
                           _c("td", [_vm._v("@mdo")])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("th", { attrs: { scope: "row" } }, [_vm._v("2")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Jacob")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Thornton")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("@fat")])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("th", { attrs: { scope: "row" } }, [_vm._v("3")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Larry")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("the Bird")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("@twitter")])
                         ])
                       ])
                     ])
@@ -688,19 +652,6 @@ var render = function() {
                 on: {
                   "update:value": function($event) {
                     return _vm.$set(_vm.yeniOgretmen, "ad", $event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("CInput", {
-                attrs: {
-                  label: "Toplam Ders Saati",
-                  value: _vm.yeniOgretmen.toplamSaat,
-                  required: ""
-                },
-                on: {
-                  "update:value": function($event) {
-                    return _vm.$set(_vm.yeniOgretmen, "toplamSaat", $event)
                   }
                 }
               })

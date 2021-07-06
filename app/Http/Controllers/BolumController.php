@@ -24,13 +24,13 @@ class BolumController extends Controller
         //
     }
 
-    public function update(Request $req)
+    public function update(Request $req, $bolum_id)
     {
-        //
+        bolum::findOrFail($bolum_id)->update($req->all());
     }
 
-    public function destroy(Request $req)
+    public function destroy($bolum_id)
     {
-        bolum::find($req->id)->delete();
+        bolum::findorFail($bolum_id)->delete();
     }
 }

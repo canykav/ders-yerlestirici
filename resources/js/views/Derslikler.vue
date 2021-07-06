@@ -102,14 +102,14 @@ export default {
             console.log(error.response.data);
           });      
     },
-      listDerslikler() {
-      axios.get('/api/derslikler')
-          .then(response => {
-              this.derslikler = response.data.data;
-          })
-          .catch(error => {
-            console.log(error.response.data);
-          });
+    listDerslikler() {
+    axios.get('/api/derslikler')
+        .then(response => {
+            this.derslikler = response.data.data;
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
     },
     showAlert(){
       this.dismissCountDown = this.dismissSecs;

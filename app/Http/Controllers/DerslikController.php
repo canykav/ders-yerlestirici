@@ -8,10 +8,15 @@ use App\Models\Derslik;
 
 class DerslikController extends Controller
 {
-    public function index()
+    public function index(request $req)
     {
-        $derslikler = derslik::get();
-        return response()->json(['status' => 'success','data' => $derslikler]);
+        if($req->seperate==1){
+            $derslikler['sinif'] = derslik::where('tur','Sınıf')->get();
+            $derslikler['laboratuvar'] = derslik::where('tur','Laboratuvar')->get();
+        } else {
+            $derslikler = derslik::get();  
+        }
+        return response()->json(['status' => 'success','data' => $derslikler]);    
     }
 
     public function store(DerslikRequest $req)

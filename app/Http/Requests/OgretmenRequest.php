@@ -24,8 +24,7 @@ class OgretmenRequest extends FormRequest
     public function rules()
     {
         return [
-            'ad' => 'required',
-            'toplam_saat' => 'required'
+            'ad' => 'required'
         ];
     }
 }

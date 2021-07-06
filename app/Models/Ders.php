@@ -17,6 +17,7 @@ class Ders extends Model
         'kod',
         'ad',
         'bolum',
+        'ogretmen',
         'teorik',
         'lab',
         'teorik_derslik',
@@ -28,5 +29,18 @@ class Ders extends Model
     public function bolum()
     {
         return $this->hasOne(bolum::class, 'id', 'bolum');
+    }
+
+    public function getTeorikDerslik()
+    {
+        return $this->belongsTo(derslik::class, 'teorik_derslik', 'id');
+    }
+    public function getLabDerslik()
+    {
+        return $this->belongsTo(derslik::class, 'lab_derslik', 'id');
+    }
+    public function getOgretmen()
+    {
+        return $this->belongsTo(ogretmen::class, 'ogretmen', 'id');
     }
 }

@@ -25,8 +25,8 @@
                 <tr>
                   <td :key="gun" v-for="gun in tumGunler">
                     <div class="ml-4">
-                    <input type="checkbox" class="form-check-input" v-model="gunler[gun]">
-                    <label class="form-check-label"> {{gun}} </label>
+                    <input type="checkbox" class="form-check-input" v-model="gunler[gun]" v-bind:id="gun" role="button">
+                    <label class="form-check-label" :for="gun" role="button"> {{gun}} </label>
                     </div>
                   </td>
                 </tr>
@@ -90,7 +90,7 @@
             </div>
           </CCardHeader>
           <CCardBody>
-
+<div class="table-responsive">
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -111,17 +111,14 @@
     </tr>
   </tbody>
 </table>
-
+</div>
        </CCardBody>
         </CCard>
       </CCol>
-
     </CRow>
 </div>
 </template>
-
 <script>
-
 
 export default {    
     data() {
@@ -207,7 +204,6 @@ export default {
       listGunler() {
       axios.get('/api/gunler')
             .then(response => {
-                console.log(response);
                 if(response.status==204) {
                   this.kayitliGunler=false;
                   this.activeTab=0;

@@ -9,10 +9,10 @@
           </CCardHeader>
           <CCardBody>
 
-            <CButton color="info" @click="deleteOgretmen()">
+            <CButton color="info">
               Tamamlama Kontrolü
             </CButton>
-            <CButton color="danger" @click="deleteOgretmen()">
+            <CButton color="danger">
               Otomatik Yerleştir
             </CButton>
           </CCardBody>
