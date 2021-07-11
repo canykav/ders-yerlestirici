@@ -1,4 +1,5 @@
 <template>
+<div>
   <CDropdown
     inNav
     class="c-header-nav-items"
@@ -20,19 +21,17 @@
       class="text-center"
       color="light"
     >
-      <strong>Kullanıcı Adı</strong>
+      <strong>Kullanıcı Ayarları</strong>
     </CDropdownHeader>
-    <CDropdownItem>
-      <CIcon name="cil-user" /> Profil
-    </CDropdownItem>
-    <CDropdownItem>
-      <CIcon name="cil-settings" /> Ayarlar
-    </CDropdownItem>
-    <CDropdownDivider/>
-    <CDropdownItem>
+    <CDropdownItem onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
       <CIcon name="cil-lock-locked" /> Çıkış Yap
     </CDropdownItem>
   </CDropdown>
+     <form id="logout-form" action="/logout" method="POST" style="display:none;">
+        <input type="hidden" name="_token" :value="csrf">
+    </form>
+  </div>
+  
 </template>
 
 <script>
@@ -40,8 +39,14 @@ export default {
   name: 'TheHeaderDropdownAccnt',
   data () {
     return { 
-      itemsCount: 42
+      itemsCount: 42,
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     }
+  },
+  methods: {
+    submit(){
+        this.$refs.form.submit();
+    },
   }
 }
 </script>

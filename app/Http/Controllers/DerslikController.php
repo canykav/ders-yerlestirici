@@ -29,13 +29,13 @@ class DerslikController extends Controller
         //
     }
 
-    public function update(Request $req)
+    public function update($derslik_id, Request $req)
     {
-        //
+        derslik::findOrFail($derslik_id)->update($req->all());
     }
 
-    public function destroy(Request $req)
+    public function destroy($derslik_id, Request $req)
     {
-        derslik::find($req->id)->delete();
+        derslik::findOrFail($derslik_id)->delete();
     }
 }

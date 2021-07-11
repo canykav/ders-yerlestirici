@@ -56,23 +56,93 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      ogretmenler: null,
+      ogretmenler: [],
       ogretmenEkleModal: false,
       yeniOgretmen: {},
       ogretmen: [],
+      bolumler: {},
+      gunler: [],
       message: null,
       dismissSecs: 5,
-      dismissCountDown: 0
+      dismissCountDown: 0,
+      bolumDersleri: [],
+      derslikler: [],
+      selected: null,
+      program: [],
+      selectedSaat: "",
+      hoveredCell: null
     };
   },
   props: {
     selectedOgretmen: Number
   },
   mounted: function mounted() {
+    this.listBolumler();
     this.listOgretmenler();
+    this.listDerslikler();
   },
   methods: {
     listOgretmenler: function listOgretmenler() {
@@ -84,53 +154,69 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error.response.data);
       });
     },
-    deleteOgretmen: function deleteOgretmen() {
-      var _this2 = this;
-
-      axios["delete"]('/api/ogretmenler', {
-        params: {
-          id: this.selectedOgretmen
-        }
-      }).then(function (response) {
-        _this2.listOgretmenler();
-
-        _this2.message = 'Öğretmen başarıyla silindi.';
-
-        _this2.showAlert();
-      })["catch"](function (error) {
-        console.log(error.response.data);
-      });
-    },
-    createOgretmen: function createOgretmen() {
-      var _this3 = this;
-
-      axios.post('/api/ogretmenler', {
-        ad: this.yeniOgretmen.ad,
-        toplam_saat: this.yeniOgretmen.toplamSaat
-      }).then(function (response) {
-        _this3.listOgretmenler();
-
-        _this3.ogretmenEkleModal = false;
-        _this3.message = 'Öğretmen başarıyla eklendi.';
-
-        _this3.showAlert();
-
-        _this3.yeniOgretmen = {};
-      })["catch"](function (error) {
-        console.log(error.response.data);
-      });
-    },
-    getOgretmenInfo: function getOgretmenInfo(ogretmen) {
-      var _this4 = this;
-
-      axios.get('/api/ogretmenler/' + ogretmen).then(function (response) {
-        _this4.ogretmen = response.data.data;
-      })["catch"](function (error) {
-        console.log(error.response.data);
-      });
-    },
     showAlert: function showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+    listBolumler: function listBolumler() {
+      var _this2 = this;
+
+      axios.get('/api/bolumler').then(function (response) {
+        _this2.bolumler = response.data.data;
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    listBolumDersleri: function listBolumDersleri(bolum) {
+      var _this3 = this;
+
+      axios.get('/api/dersler/', {
+        params: {
+          bolum: bolum
+        }
+      }).then(function (response) {
+        _this3.bolumDersleri = response.data.data;
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    listDerslikler: function listDerslikler() {
+      var _this4 = this;
+
+      axios.get('/api/derslikler').then(function (response) {
+        _this4.derslikler = response.data.data;
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    showDersYerlestirModal: function showDersYerlestirModal(val) {
+      this.selectedSaat = val;
+    },
+    listProgram: function listProgram(filter, id) {
+      var _this5 = this;
+
+      axios.get('/api/program', {
+        params: {
+          filter: filter,
+          id: id
+        }
+      }).then(function (response) {
+        _this5.program = null;
+        _this5.program = response.data.data.saatler;
+        _this5.gunler = response.data.data.gunler;
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    hoverTable: function hoverTable(val) {
+      if (this.hoveredCell) {
+        document.getElementById(this.hoveredCell).removeAttribute('style');
+      }
+
+      document.getElementById('program-' + val).style.backgroundColor = "#00001513";
+      this.hoveredCell = 'program-' + val;
+    },
+    unHoverTable: function unHoverTable() {
+      document.getElementById(this.hoveredCell).removeAttribute('style');
     }
   }
 });
@@ -250,22 +336,320 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "CCard",
+        "CRow",
         [
-          _c("CCardHeader", [
-            _vm._v("\r\n            Ders Programı\r\n          ")
-          ]),
+          _c(
+            "CCol",
+            { attrs: { sm: "3" } },
+            [
+              _c(
+                "CCard",
+                [
+                  _c("CCardHeader", [
+                    _vm._v("\r\n            Ders Programı\r\n          ")
+                  ]),
+                  _vm._v(" "),
+                  _c("CCardBody", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Bölümler")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected,
+                              expression: "selected"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { size: "4" },
+                          on: {
+                            click: function($event) {
+                              _vm.listProgram(
+                                $event.target.value.replace(/[^a-z][0-9]/g, ""),
+                                $event.target.value.replace(/^\D+/g, "")
+                              )
+                            },
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selected = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.bolumler, function(bolum) {
+                          return _c(
+                            "option",
+                            {
+                              key: bolum.id,
+                              domProps: { value: "bolum-" + bolum.id }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(bolum.ad) + "-" + _vm._s(bolum.ogretim)
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Öğretmenler")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected,
+                              expression: "selected"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { size: "4" },
+                          on: {
+                            click: function($event) {
+                              _vm.listProgram(
+                                $event.target.value.replace(/[^a-z][0-9]/g, ""),
+                                $event.target.value.replace(/^\D+/g, "")
+                              )
+                            },
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selected = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.ogretmenler, function(ogretmen) {
+                          return _c(
+                            "option",
+                            {
+                              key: ogretmen.id,
+                              domProps: { value: "ogretmen-" + ogretmen.id }
+                            },
+                            [_vm._v(_vm._s(ogretmen.ad))]
+                          )
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Derslikler")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected,
+                              expression: "selected"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { size: "4" },
+                          on: {
+                            click: function($event) {
+                              _vm.listProgram(
+                                $event.target.value.replace(/[^a-z][0-9]/g, ""),
+                                $event.target.value.replace(/^\D+/g, "")
+                              )
+                            },
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selected = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.derslikler, function(derslik) {
+                          return _c(
+                            "option",
+                            {
+                              key: derslik.id,
+                              domProps: { value: "derslik-" + derslik.id }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(derslik.ad) +
+                                  " (" +
+                                  _vm._s(derslik.tur) +
+                                  ")"
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
-            "CCardBody",
+            "CCol",
+            { attrs: { sm: "9" } },
             [
-              _c("CButton", { attrs: { color: "info" } }, [
-                _vm._v("\r\n              Tamamlama Kontrolü\r\n            ")
-              ]),
-              _vm._v(" "),
-              _c("CButton", { attrs: { color: "danger" } }, [
-                _vm._v("\r\n              Otomatik Yerleştir\r\n            ")
-              ])
+              _c(
+                "CCard",
+                [
+                  _c("CCardHeader", [
+                    _vm._v("\r\n            Ders Programı\r\n          ")
+                  ]),
+                  _vm._v(" "),
+                  _c("CCardBody", [
+                    _vm.program.length > 0
+                      ? _c("table", { staticClass: "table table-bordered" }, [
+                          _c("thead", [
+                            _c(
+                              "tr",
+                              [
+                                _c("th", { staticStyle: { width: "160px" } }, [
+                                  _vm._v("#")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.gunler, function(gun) {
+                                  return _c(
+                                    "th",
+                                    { key: gun.id, attrs: { scope: "col" } },
+                                    [_vm._v(_vm._s(gun.gun))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.program, function(ders) {
+                              return _c(
+                                "tr",
+                                [
+                                  _c("td", [
+                                    _vm._v(
+                                      _vm._s(ders.baslangic) +
+                                        " - " +
+                                        _vm._s(ders.bitis)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(6, function(item, index) {
+                                    return ders[index] != null
+                                      ? _c(
+                                          "td",
+                                          {
+                                            key: index,
+                                            class: {
+                                              "bg-dark": ders[index] == 0
+                                            },
+                                            attrs: {
+                                              value: ders[index]["saat"],
+                                              role: "button",
+                                              id:
+                                                "program-" + ders[index]["saat"]
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.showDersYerlestirModal(
+                                                  ders[index]["saat"]
+                                                )
+                                              },
+                                              mouseover: function($event) {
+                                                return _vm.hoverTable(
+                                                  ders[index]["saat"]
+                                                )
+                                              },
+                                              mouseout: function($event) {
+                                                return _vm.unHoverTable()
+                                              }
+                                            }
+                                          },
+                                          [
+                                            ders[index].ders !== undefined
+                                              ? _c("span", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      ders[index].ders["ad"]
+                                                    )
+                                                  )
+                                                ])
+                                              : _vm._e(),
+                                            _c("br"),
+                                            _vm._v(" "),
+                                            ders[index].ogretmen !== undefined
+                                              ? _c("span", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      ders[index].ogretmen["ad"]
+                                                    ) + " / "
+                                                  )
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            ders[index].derslik !== undefined
+                                              ? _c("span", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      ders[index].derslik["ad"]
+                                                    )
+                                                  )
+                                                ])
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  })
+                                ],
+                                2
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ],
+                1
+              )
             ],
             1
           )

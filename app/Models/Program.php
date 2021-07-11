@@ -21,4 +21,17 @@ class Program extends Model
     ];
 
     public $timestamps = false;
+
+    public function ders()
+    {
+        return $this->hasOne(ders::class, 'id', 'ders');
+    }
+    public function ogretmen()
+    {
+        return $this->hasOne(ogretmen::class, 'id', 'ogretmen');
+    }
+    public function derslik()
+    {
+        return $this->hasOne(derslik::class, 'id', 'derslik');
+    }
 }

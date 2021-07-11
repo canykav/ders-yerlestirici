@@ -28,7 +28,7 @@
           </CCardBody>
         </CCard>
                <CRow>
-      <CCol sm="6">
+      <CCol>
                 <CCard>
           <CCardHeader>
             Öğretmen Bilgisi
@@ -58,36 +58,7 @@
         </CCard>
         
       </CCol>
-          
-      <CCol sm="6">
-        <CCard>
-          <CCardHeader>
-            Öğretmenin Haftalık Programı
-          </CCardHeader>
-          <CCardBody>
-
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</table>
-       </CCardBody>
-        </CCard>
-      </CCol>
-
+        
     </CRow>
 
       <form @submit.prevent="createOgretmen()" id="createOgretmenForm">

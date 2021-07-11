@@ -112,6 +112,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   trash: _coreui_icons__WEBPACK_IMPORTED_MODULE_0__.cilTrash,
@@ -120,11 +160,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       derslikEkleModal: false,
+      derslikGuncelleModal: false,
+      derslikSilModal: false,
       derslikler: {},
       yeniDerslik: {},
       message: null,
       dismissSecs: 5,
-      dismissCountDown: 0
+      dismissCountDown: 0,
+      processedDerslik: {}
     };
   },
   mounted: function mounted() {
@@ -159,8 +202,43 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error.response.data);
       });
     },
+    showDerslikDuzenleModal: function showDerslikDuzenleModal(derslik) {
+      Object.assign(this.processedDerslik, derslik);
+      this.derslikGuncelleModal = true;
+    },
+    updateDerslik: function updateDerslik() {
+      var _this3 = this;
+
+      axios.put('/api/derslikler/' + this.processedDerslik.id, {
+        ad: this.processedDerslik.ad,
+        tur: this.processedDerslik.tur
+      }).then(function (response) {
+        _this3.listDerslikler();
+
+        _this3.derslikGuncelleModal = false;
+        _this3.processedDerslik = {};
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
+    deleteDerslik: function deleteDerslik() {
+      var _this4 = this;
+
+      axios["delete"]('/api/derslikler/' + this.processedDerslik.id).then(function (response) {
+        _this4.listDerslikler();
+
+        _this4.derslikSilModal = false;
+        _this4.processedDerslik = {};
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
+    },
     showAlert: function showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+    showDerslikSilModal: function showDerslikSilModal(derslik) {
+      Object.assign(this.processedDerslik, derslik);
+      this.derslikSilModal = true;
     }
   }
 });
@@ -338,14 +416,28 @@ var render = function() {
                           [
                             _c(
                               "CButton",
-                              { attrs: { type: "submit", color: "info" } },
+                              {
+                                attrs: { color: "info" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showDerslikDuzenleModal(derslik)
+                                  }
+                                }
+                              },
                               [_c("CIcon", { attrs: { name: "cil-pencil" } })],
                               1
                             ),
                             _vm._v(" "),
                             _c(
                               "CButton",
-                              { attrs: { type: "submit", color: "danger" } },
+                              {
+                                attrs: { color: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showDerslikSilModal(derslik)
+                                  }
+                                }
+                              },
                               [
                                 _c("CIcon", {
                                   attrs: { content: _vm.$options.trash }
@@ -459,6 +551,174 @@ var render = function() {
               })
             ],
             1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          attrs: { id: "updateDerslikForm" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.updateDerslik()
+            }
+          }
+        },
+        [
+          _c(
+            "CModal",
+            {
+              attrs: {
+                title: "Derslik Güncelle",
+                size: "sm",
+                show: _vm.derslikGuncelleModal
+              },
+              on: {
+                "update:show": function($event) {
+                  _vm.derslikGuncelleModal = $event
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "footer",
+                  fn: function() {
+                    return [
+                      _c(
+                        "CButton",
+                        {
+                          attrs: { color: "secondary" },
+                          on: {
+                            click: function($event) {
+                              _vm.derslikGuncelleModal = false
+                            }
+                          }
+                        },
+                        [_vm._v("Vazgeç")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "CButton",
+                        {
+                          attrs: {
+                            form: "updateDerslikForm",
+                            type: "submit",
+                            color: "primary"
+                          }
+                        },
+                        [_vm._v("Kaydet")]
+                      )
+                    ]
+                  },
+                  proxy: true
+                }
+              ])
+            },
+            [
+              _c("CInput", {
+                attrs: {
+                  label: "Derslik Adı",
+                  value: _vm.processedDerslik.ad,
+                  required: ""
+                },
+                on: {
+                  "update:value": function($event) {
+                    return _vm.$set(_vm.processedDerslik, "ad", $event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("CSelect", {
+                attrs: {
+                  label: "Türü",
+                  options: ["Sınıf", "Laboratuvar"],
+                  placeholder: "Seçiniz",
+                  value: _vm.processedDerslik.tur,
+                  required: ""
+                },
+                on: {
+                  "update:value": function($event) {
+                    return _vm.$set(_vm.processedDerslik, "tur", $event)
+                  }
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          attrs: { id: "deleteDerslikForm" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.deleteDerslik()
+            }
+          }
+        },
+        [
+          _c(
+            "CModal",
+            {
+              attrs: {
+                title: "Derslik Silme",
+                size: "sm",
+                color: "danger",
+                show: _vm.derslikSilModal
+              },
+              on: {
+                "update:show": function($event) {
+                  _vm.derslikSilModal = $event
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "footer",
+                  fn: function() {
+                    return [
+                      _c(
+                        "CButton",
+                        {
+                          attrs: { color: "secondary" },
+                          on: {
+                            click: function($event) {
+                              _vm.derslikSilModal = false
+                            }
+                          }
+                        },
+                        [_vm._v("Vazgeç")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "CButton",
+                        {
+                          attrs: {
+                            form: "deleteDerslikForm",
+                            type: "submit",
+                            color: "danger"
+                          }
+                        },
+                        [_vm._v("Sil")]
+                      )
+                    ]
+                  },
+                  proxy: true
+                }
+              ])
+            },
+            [
+              _vm._v(
+                "\r\n         " +
+                  _vm._s(_vm.processedDerslik.ad) +
+                  " dersliği silinecektir. Emin misiniz?\r\n      "
+              )
+            ]
           )
         ],
         1

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\OgretmenRequest;
 use App\Models\Ogretmen;
-use App\Models\Ders;
 
 class OgretmenController extends Controller
 {
@@ -24,6 +23,7 @@ class OgretmenController extends Controller
     {
         $ogretmen = ogretmen::findOrFail($ogretmen_id);
         $ogretmen->dersler;
+        $ogretmen['toplam_saat'] = $ogretmen->getToplamSaat();
         return response()->json(['status' => 'success','data' => $ogretmen]);
     }
 

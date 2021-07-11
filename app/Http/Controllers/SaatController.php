@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Request;
 use App\Http\Requests\SaatRequest;
-use App\Models\Saat;
-use App\Models\Gun;
+use App\Models\gun;
+use App\Models\saat;
 
 class SaatController extends Controller
 {

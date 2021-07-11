@@ -14,9 +14,7 @@ class Ogretmen extends Model
     protected $primaryKey ='id';
 
     protected $fillable = [
-        'ad',
-        'toplam_saat',
-        'uygun_saat',
+        'ad'
     ];
 
     public $timestamps = false;
@@ -24,5 +22,8 @@ class Ogretmen extends Model
     public function dersler()
     {
         return $this->hasMany(ders::class, 'ogretmen', 'id');
+    }
+    public function getToplamSaat() {
+        return $this->dersler->sum('teorik') + $this->dersler->sum('lab');
     }
 }

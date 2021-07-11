@@ -95,35 +95,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -451,7 +422,6 @@ var render = function() {
         [
           _c(
             "CCol",
-            { attrs: { sm: "6" } },
             [
               _c(
                 "CCard",
@@ -515,59 +485,6 @@ var render = function() {
                     ],
                     1
                   )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "CCol",
-            { attrs: { sm: "6" } },
-            [
-              _c(
-                "CCard",
-                [
-                  _c("CCardHeader", [
-                    _vm._v(
-                      "\r\n            Öğretmenin Haftalık Programı\r\n          "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("CCardBody", [
-                    _c("table", { staticClass: "table table-bordered" }, [
-                      _c("thead", [
-                        _c("tr", [
-                          _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("First")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Last")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Handle")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Mark")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Otto")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("@mdo")])
-                        ])
-                      ])
-                    ])
-                  ])
                 ],
                 1
               )

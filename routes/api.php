@@ -8,6 +8,7 @@ use App\Http\Controllers\OgretmenController;
 use App\Http\Controllers\DerslikController;
 use App\Http\Controllers\BolumController;
 use App\Http\Controllers\DersController;
+use App\Http\Controllers\ProgramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +71,12 @@ Route::prefix('/derslikler')->group(function () {
     Route::put('/{derslik_id}', [DerslikController::class, 'update']);
     Route::get('/{derslik_id}', [DerslikController::class, 'show']);
     Route::delete('/{derslik_id}', [DerslikController::class, 'destroy']);
+});
+
+Route::prefix('/program')->group(function () {
+    Route::get('/', [ProgramController::class, 'index']);
+    Route::post('/', [ProgramController::class, 'store']);
+    Route::put('/{derslik_id}', [ProgramController::class, 'update']);
+    Route::get('/{derslik_id}', [ProgramController::class, 'show']);
+    Route::delete('/{derslik_id}', [ProgramController::class, 'destroy']);
 });

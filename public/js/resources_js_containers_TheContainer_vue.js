@@ -66,7 +66,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'TheFooter'
 });
@@ -175,13 +174,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'TheHeaderDropdownAccnt',
   data: function data() {
     return {
-      itemsCount: 42
+      itemsCount: 42,
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
+  },
+  methods: {
+    submit: function submit() {
+      this.$refs.form.submit();
+    }
   }
 });
 
@@ -879,11 +883,7 @@ var render = function() {
   return _c("CFooter", { attrs: { fixed: false } }, [
     _c("div", { staticClass: "mfs-auto" }, [
       _c("span", { staticClass: "mr-1", attrs: { target: "_blank" } }, [
-        _vm._v("Powered by")
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "https://coreui.io/vue" } }, [
-        _vm._v("CoreUI for Vue")
+        _vm._v("Ege Üniversitesi Bilgisayar Programcılığı")
       ])
     ])
   ])
@@ -1005,61 +1005,77 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "CDropdown",
-    {
-      staticClass: "c-header-nav-items",
-      attrs: { inNav: "", placement: "bottom-end", "add-menu-classes": "pt-0" },
-      scopedSlots: _vm._u([
-        {
-          key: "toggler",
-          fn: function() {
-            return [
-              _c("CHeaderNavLink", [
-                _c("div", { staticClass: "c-avatar" }, [
-                  _c("img", {
-                    staticClass: "c-avatar-img",
-                    attrs: { src: "img/blank-profile.png" }
-                  })
-                ])
-              ])
-            ]
-          },
-          proxy: true
-        }
-      ])
-    },
+    "div",
     [
-      _vm._v(" "),
       _c(
-        "CDropdownHeader",
-        { staticClass: "text-center", attrs: { tag: "div", color: "light" } },
-        [_c("strong", [_vm._v("Kullanıcı Adı")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "CDropdownItem",
-        [_c("CIcon", { attrs: { name: "cil-user" } }), _vm._v(" Profil\n  ")],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "CDropdownItem",
+        "CDropdown",
+        {
+          staticClass: "c-header-nav-items",
+          attrs: {
+            inNav: "",
+            placement: "bottom-end",
+            "add-menu-classes": "pt-0"
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "toggler",
+              fn: function() {
+                return [
+                  _c("CHeaderNavLink", [
+                    _c("div", { staticClass: "c-avatar" }, [
+                      _c("img", {
+                        staticClass: "c-avatar-img",
+                        attrs: { src: "img/blank-profile.png" }
+                      })
+                    ])
+                  ])
+                ]
+              },
+              proxy: true
+            }
+          ])
+        },
         [
-          _c("CIcon", { attrs: { name: "cil-settings" } }),
-          _vm._v(" Ayarlar\n  ")
+          _vm._v(" "),
+          _c(
+            "CDropdownHeader",
+            {
+              staticClass: "text-center",
+              attrs: { tag: "div", color: "light" }
+            },
+            [_c("strong", [_vm._v("Kullanıcı Ayarları")])]
+          ),
+          _vm._v(" "),
+          _c(
+            "CDropdownItem",
+            {
+              attrs: {
+                onclick:
+                  "event.preventDefault(); document.getElementById('logout-form').submit();"
+              }
+            },
+            [
+              _c("CIcon", { attrs: { name: "cil-lock-locked" } }),
+              _vm._v(" Çıkış Yap\n    ")
+            ],
+            1
+          )
         ],
         1
       ),
       _vm._v(" "),
-      _c("CDropdownDivider"),
-      _vm._v(" "),
       _c(
-        "CDropdownItem",
+        "form",
+        {
+          staticStyle: { display: "none" },
+          attrs: { id: "logout-form", action: "/logout", method: "POST" }
+        },
         [
-          _c("CIcon", { attrs: { name: "cil-lock-locked" } }),
-          _vm._v(" Çıkış Yap\n  ")
-        ],
-        1
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf }
+          })
+        ]
       )
     ],
     1

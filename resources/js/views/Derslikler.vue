@@ -26,10 +26,10 @@
       <td>{{derslik.tur}}</td>
       <td>
         <CButtonGroup>
-          <CButton type="submit" color="info">
+          <CButton color="info" @click="showDerslikDuzenleModal(derslik)">
             <CIcon name="cil-pencil"/>
           </CButton>
-          <CButton type="submit" color="danger">
+          <CButton color="danger" @click="showDerslikSilModal(derslik)">
               <CIcon :content="$options.trash"/>
           </CButton>
         </CButtonGroup>
@@ -63,6 +63,46 @@
       </template>
     </CModal>
         </form>
+
+              <form @submit.prevent="updateDerslik()" id="updateDerslikForm">
+      <CModal
+      title="Derslik Güncelle"
+      size="sm"
+      :show.sync="derslikGuncelleModal"
+    >
+          <CInput
+            label="Derslik Adı"
+            :value.sync="processedDerslik.ad"
+            required
+          />
+          <CSelect
+            label="Türü"
+            :options="['Sınıf', 'Laboratuvar']"
+            placeholder="Seçiniz"
+            :value.sync="processedDerslik.tur"
+            required
+          />
+            <template #footer>
+        <CButton @click="derslikGuncelleModal = false" color="secondary">Vazgeç</CButton>
+        <CButton form="updateDerslikForm" type="submit" color="primary">Kaydet</CButton>
+      </template>
+    </CModal>
+        </form>
+
+      <form @submit.prevent="deleteDerslik()" id="deleteDerslikForm">
+      <CModal
+        title="Derslik Silme"
+        size="sm"
+        color="danger"
+        :show.sync="derslikSilModal"
+      >
+         {{processedDerslik.ad}} dersliği silinecektir. Emin misiniz?
+      <template #footer>
+        <CButton @click="derslikSilModal = false" color="secondary">Vazgeç</CButton>
+        <CButton form="deleteDerslikForm" type="submit" color="danger">Sil</CButton>
+      </template>
+    </CModal>
+    </form>
     </div>
 </template>
 
@@ -75,11 +115,14 @@ export default {
   data() {
     return {
       derslikEkleModal: false,
+      derslikGuncelleModal: false,
+      derslikSilModal: false,
       derslikler: {},
       yeniDerslik: {},
       message: null,
       dismissSecs: 5,
       dismissCountDown: 0,
+      processedDerslik: {},
     }
   },
    mounted() {
@@ -111,8 +154,41 @@ export default {
           console.log(error.response.data);
         });
     },
+    showDerslikDuzenleModal(derslik){
+     Object.assign(this.processedDerslik, derslik);
+     this.derslikGuncelleModal = true;
+    },
+    updateDerslik(){
+      axios.put('/api/derslikler/'+this.processedDerslik.id, {
+        ad: this.processedDerslik.ad,
+        tur: this.processedDerslik.tur
+      })
+      .then(response => {
+          this.listDerslikler();
+          this.derslikGuncelleModal = false;
+          this.processedDerslik = {};
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },  
+    deleteDerslik(){
+      axios.delete('/api/derslikler/'+this.processedDerslik.id)
+      .then(response => {
+        this.listDerslikler();
+        this.derslikSilModal=false;
+        this.processedDerslik = {};    
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },  
     showAlert(){
       this.dismissCountDown = this.dismissSecs;
+    },
+    showDerslikSilModal(derslik) {
+      Object.assign(this.processedDerslik, derslik);
+      this.derslikSilModal = true;
     }
   }
 }
@@ -121,3 +197,5 @@ export default {
 <style>
 
 </style>
+
+
