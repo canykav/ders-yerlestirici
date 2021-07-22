@@ -9,6 +9,11 @@ use App\Models\saat;
 
 class SaatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $saatler = saat::distinct('baslangic')->orderBy('baslangic')->get(['baslangic','bitis']);
@@ -24,7 +29,7 @@ class SaatController extends Controller
                 if(($query)->exists()){
                     $saat[$i] = $query->first()->id;
                 }
-            }          
+            }
         }
         return response()->json(['status' => 'success', 'data' => $saatler]);
     }
@@ -38,7 +43,7 @@ class SaatController extends Controller
                 $data['gun'] = $gun['id'];
                 saat::create($data);
             }
-        } 
+        }
         else {
             saat::create($req->all());
         }
@@ -49,7 +54,7 @@ class SaatController extends Controller
         //
     }
 
-    public function update(Request $req, Dashboard $dashboard)
+    public function update(Request $req)
     {
         //
     }

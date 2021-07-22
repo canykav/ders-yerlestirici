@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Table_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Table.vue */ "./resources/js/views/base/Table.vue");
-/* harmony import */ var _users_UsersData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../users/UsersData */ "./resources/js/views/users/UsersData.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module '../users/UsersData'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
@@ -183,154 +183,10 @@ __webpack_require__.r(__webpack_exports__);
       return array;
     },
     getShuffledUsersData: function getShuffledUsersData() {
-      return this.shuffleArray(_users_UsersData__WEBPACK_IMPORTED_MODULE_1__.default.slice(0));
+      return this.shuffleArray(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../users/UsersData'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(0));
     }
   }
 });
-
-/***/ }),
-
-/***/ "./resources/js/views/users/UsersData.js":
-/*!***********************************************!*\
-  !*** ./resources/js/views/users/UsersData.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var usersData = [{
-  username: 'Samppa Nori',
-  registered: '2012/01/01',
-  role: 'Member',
-  status: 'Active'
-}, {
-  username: 'Estavan Lykos',
-  registered: '2012/02/01',
-  role: 'Staff',
-  status: 'Banned'
-}, {
-  username: 'Chetan Mohamed',
-  registered: '2012/02/01',
-  role: 'Admin',
-  status: 'Inactive'
-}, {
-  username: 'Derick Maximinus',
-  registered: '2012/03/01',
-  role: 'Member',
-  status: 'Pending'
-}, {
-  username: 'Friderik Dávid',
-  registered: '2012/01/21',
-  role: 'Staff',
-  status: 'Active'
-}, {
-  username: 'Yiorgos Avraamu',
-  registered: '2012/01/01',
-  role: 'Member',
-  status: 'Active'
-}, {
-  username: 'Avram Tarasios',
-  registered: '2012/02/01',
-  role: 'Staff',
-  status: 'Banned',
-  _classes: 'table-success'
-}, {
-  username: 'Quintin Ed',
-  registered: '2012/02/01',
-  role: 'Admin',
-  status: 'Inactive'
-}, {
-  username: 'Enéas Kwadwo',
-  registered: '2012/03/01',
-  role: 'Member',
-  status: 'Pending'
-}, {
-  username: 'Agapetus Tadeáš',
-  registered: '2012/01/21',
-  role: 'Staff',
-  status: 'Active'
-}, {
-  username: 'Carwyn Fachtna',
-  registered: '2012/01/01',
-  role: 'Member',
-  status: 'Active',
-  _classes: 'table-success'
-}, {
-  username: 'Nehemiah Tatius',
-  registered: '2012/02/01',
-  role: 'Staff',
-  status: 'Banned'
-}, {
-  username: 'Ebbe Gemariah',
-  registered: '2012/02/01',
-  role: 'Admin',
-  status: 'Inactive'
-}, {
-  username: 'Eustorgios Amulius',
-  registered: '2012/03/01',
-  role: 'Member',
-  status: 'Pending'
-}, {
-  username: 'Leopold Gáspár',
-  registered: '2012/01/21',
-  role: 'Staff',
-  status: 'Active'
-}, {
-  username: 'Pompeius René',
-  registered: '2012/01/01',
-  role: 'Member',
-  status: 'Active'
-}, {
-  username: 'Paĉjo Jadon',
-  registered: '2012/02/01',
-  role: 'Staff',
-  status: 'Banned'
-}, {
-  username: 'Micheal Mercurius',
-  registered: '2012/02/01',
-  role: 'Admin',
-  status: 'Inactive'
-}, {
-  username: 'Ganesha Dubhghall',
-  registered: '2012/03/01',
-  role: 'Member',
-  status: 'Pending'
-}, {
-  username: 'Hiroto Šimun',
-  registered: '2012/01/21',
-  role: 'Staff',
-  status: 'Active'
-}, {
-  username: 'Vishnu Serghei',
-  registered: '2012/01/01',
-  role: 'Member',
-  status: 'Active'
-}, {
-  username: 'Zbyněk Phoibos',
-  registered: '2012/02/01',
-  role: 'Staff',
-  status: 'Banned'
-}, {
-  username: 'Einar Randall',
-  registered: '2012/02/01',
-  role: 'Admin',
-  status: 'Inactive',
-  _classes: 'table-danger'
-}, {
-  username: 'Félix Troels',
-  registered: '2012/03/21',
-  role: 'Staff',
-  status: 'Active'
-}, {
-  username: 'Aulus Agmundr',
-  registered: '2012/01/01',
-  role: 'Member',
-  status: 'Pending'
-}];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (usersData);
 
 /***/ }),
 

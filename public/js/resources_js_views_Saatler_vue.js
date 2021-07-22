@@ -130,7 +130,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -252,7 +251,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.form-check-input {\r\n  position:unset!important;\n}\nul.nav {\r\n  margin-bottom: 20px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.form-check-input {\n  position:unset!important;\n}\nul.nav {\n  margin-bottom: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -385,7 +384,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\r\n              " + _vm._s(error[0]) + "\r\n            ")]
+          [_vm._v("\n              " + _vm._s(error[0]) + "\n            ")]
         )
       }),
       _vm._v(" "),
@@ -400,9 +399,7 @@ var render = function() {
                 "CCard",
                 [
                   _c("CCardHeader", [
-                    _vm._v(
-                      "\r\n            Ders Günleri ve Saatleri\r\n          "
-                    )
+                    _vm._v("\n            Ders Günleri ve Saatleri\n          ")
                   ]),
                   _vm._v(" "),
                   _c(
@@ -411,10 +408,7 @@ var render = function() {
                       _c(
                         "CTabs",
                         {
-                          attrs: {
-                            variant: "pills",
-                            "active-tab": _vm.activeTab
-                          },
+                          attrs: { "active-tab": _vm.activeTab },
                           on: {
                             "update:activeTab": function($event) {
                               _vm.activeTab = $event
@@ -425,190 +419,231 @@ var render = function() {
                           }
                         },
                         [
-                          _c("CTab", { attrs: { title: "Ders Günleri" } }, [
-                            _c(
-                              "form",
-                              {
-                                on: {
-                                  submit: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.createGun()
+                          _c(
+                            "CTab",
+                            {
+                              attrs: {
+                                title: "Ders Günleri",
+                                disabled: _vm.kayitliGunler == true
+                              }
+                            },
+                            [
+                              _c(
+                                "form",
+                                {
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.createGun()
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "table-responsive" }, [
-                                  _vm.kayitliGunler == false
-                                    ? _c(
-                                        "table",
-                                        {
-                                          staticClass:
-                                            "table table-bordered table-sm",
-                                          staticStyle: { "border-top": "none" }
-                                        },
-                                        [
-                                          _c("tbody", [
-                                            _c(
-                                              "tr",
-                                              _vm._l(_vm.tumGunler, function(
-                                                gun
-                                              ) {
-                                                return _c("td", { key: gun }, [
-                                                  _c(
-                                                    "div",
-                                                    { staticClass: "ml-4" },
-                                                    [
-                                                      _c("input", {
-                                                        directives: [
-                                                          {
-                                                            name: "model",
-                                                            rawName: "v-model",
-                                                            value:
-                                                              _vm.gunler[gun],
-                                                            expression:
-                                                              "gunler[gun]"
-                                                          }
-                                                        ],
-                                                        staticClass:
-                                                          "form-check-input",
-                                                        attrs: {
-                                                          type: "checkbox",
-                                                          id: gun,
-                                                          role: "button"
-                                                        },
-                                                        domProps: {
-                                                          checked: Array.isArray(
-                                                            _vm.gunler[gun]
-                                                          )
-                                                            ? _vm._i(
-                                                                _vm.gunler[gun],
-                                                                null
-                                                              ) > -1
-                                                            : _vm.gunler[gun]
-                                                        },
-                                                        on: {
-                                                          change: function(
-                                                            $event
-                                                          ) {
-                                                            var $$a =
-                                                                _vm.gunler[gun],
-                                                              $$el =
-                                                                $event.target,
-                                                              $$c = $$el.checked
-                                                                ? true
-                                                                : false
-                                                            if (
-                                                              Array.isArray($$a)
-                                                            ) {
-                                                              var $$v = null,
-                                                                $$i = _vm._i(
-                                                                  $$a,
-                                                                  $$v
-                                                                )
-                                                              if (
-                                                                $$el.checked
-                                                              ) {
-                                                                $$i < 0 &&
-                                                                  _vm.$set(
-                                                                    _vm.gunler,
-                                                                    gun,
-                                                                    $$a.concat([
-                                                                      $$v
-                                                                    ])
-                                                                  )
-                                                              } else {
-                                                                $$i > -1 &&
-                                                                  _vm.$set(
-                                                                    _vm.gunler,
-                                                                    gun,
-                                                                    $$a
-                                                                      .slice(
-                                                                        0,
-                                                                        $$i
-                                                                      )
-                                                                      .concat(
-                                                                        $$a.slice(
-                                                                          $$i +
-                                                                            1
-                                                                        )
-                                                                      )
-                                                                  )
-                                                              }
-                                                            } else {
-                                                              _vm.$set(
-                                                                _vm.gunler,
-                                                                gun,
-                                                                $$c
-                                                              )
-                                                            }
-                                                          }
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "label",
-                                                        {
-                                                          staticClass:
-                                                            "form-check-label",
-                                                          attrs: {
-                                                            for: gun,
-                                                            role: "button"
-                                                          }
-                                                        },
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "table-responsive" },
+                                    [
+                                      _vm.kayitliGunler == false
+                                        ? _c(
+                                            "table",
+                                            {
+                                              staticClass:
+                                                "table table-bordered table-sm",
+                                              staticStyle: {
+                                                "border-top": "none"
+                                              }
+                                            },
+                                            [
+                                              _c("tbody", [
+                                                _c(
+                                                  "tr",
+                                                  _vm._l(
+                                                    _vm.tumGunler,
+                                                    function(gun) {
+                                                      return _c(
+                                                        "td",
+                                                        { key: gun },
                                                         [
-                                                          _vm._v(
-                                                            " " +
-                                                              _vm._s(gun) +
-                                                              " "
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-4"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .gunler[
+                                                                        gun
+                                                                      ],
+                                                                    expression:
+                                                                      "gunler[gun]"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "form-check-input",
+                                                                attrs: {
+                                                                  type:
+                                                                    "checkbox",
+                                                                  id: gun,
+                                                                  role: "button"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm.gunler[
+                                                                      gun
+                                                                    ]
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .gunler[
+                                                                          gun
+                                                                        ],
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .gunler[
+                                                                        gun
+                                                                      ]
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .gunler[
+                                                                          gun
+                                                                        ],
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.gunler,
+                                                                            gun,
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.gunler,
+                                                                            gun,
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.gunler,
+                                                                        gun,
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "form-check-label",
+                                                                  attrs: {
+                                                                    for: gun,
+                                                                    role:
+                                                                      "button"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    " " +
+                                                                      _vm._s(
+                                                                        gun
+                                                                      ) +
+                                                                      " "
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
                                                           )
                                                         ]
                                                       )
-                                                    ]
-                                                  )
-                                                ])
-                                              }),
-                                              0
-                                            )
-                                          ])
-                                        ]
-                                      )
-                                    : _vm._e(),
+                                                    }
+                                                  ),
+                                                  0
+                                                )
+                                              ])
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  ),
                                   _vm._v(" "),
-                                  _vm.kayitliGunler == true
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "Eklenen günler tabloda listelenmektedir."
-                                        )
-                                      ])
-                                    : _vm._e()
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "form-actions mt-3" },
-                                  [
-                                    _vm.kayitliGunler == false
-                                      ? _c(
-                                          "CButton",
-                                          {
-                                            attrs: {
-                                              type: "submit",
-                                              color: "info"
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\r\n                Kaydet\r\n                "
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ],
-                                  1
-                                )
-                              ]
-                            )
-                          ]),
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-actions mt-3" },
+                                    [
+                                      _vm.kayitliGunler == false
+                                        ? _c(
+                                            "CButton",
+                                            {
+                                              attrs: {
+                                                type: "submit",
+                                                color: "info"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                Kaydet\n                "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c("CTab", { attrs: { title: "Ders Saatleri" } }, [
                             _c(
@@ -710,9 +745,7 @@ var render = function() {
                 "CCard",
                 [
                   _c("CCardHeader", [
-                    _vm._v(
-                      "\r\n            Eklenen Ders Saatleri\r\n            "
-                    ),
+                    _vm._v("\n            Eklenen Ders Saatleri\n            "),
                     _c(
                       "div",
                       { staticClass: "card-header-actions" },

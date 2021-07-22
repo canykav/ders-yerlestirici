@@ -8,12 +8,17 @@ use App\Models\Ders;
 
 class DersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(request $req)
     {
         if($req->bolum){
-            $dersler = ders::where('bolum',$req->bolum)->get();  
+            $dersler = ders::where('bolum',$req->bolum)->get();
         } else {
-            $dersler = ders::get();  
+            $dersler = ders::get();
         }
         foreach($dersler as $item) {
             $ders = ders::find($item['id']);
@@ -21,7 +26,7 @@ class DersController extends Controller
             $item['lab_derslik_adi'] = ($item['lab_derslik']) ? $ders->getLabDerslik->ad : null;
             $item['ogretmen_adi'] = ($item['ogretmen']) ? $ders->getOgretmen->ad : null;
         }
-        return response()->json(['status' => 'success','data' => $dersler]);    
+        return response()->json(['status' => 'success','data' => $dersler]);
     }
 
     public function store(request $req)
@@ -34,13 +39,13 @@ class DersController extends Controller
         //
     }
 
-    public function update(Request $req)
+    public function update(Request $req,$ders)
     {
-        //
+        ders::findOrFail($ders)->update($req->all());
     }
 
-    public function destroy(Request $req)
+    public function destroy($ders)
     {
-        ders::findOrFail($req->id)->delete();
+        ders::findOrFail($ders)->delete();
     }
 }

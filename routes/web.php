@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SaatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +13,6 @@ use App\Http\Controllers\SaatController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::any('/{all}', function () {
-    return view('home');
-})->where(['all' => '.*'])->middleware('auth');
+Route::any('/{all}', [App\Http\Controllers\HomeController::class, 'index'])->where(['all' => '.*'])->middleware('auth');

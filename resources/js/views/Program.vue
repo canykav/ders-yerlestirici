@@ -18,7 +18,7 @@
           </div>
             <div class="form-group">
             <label>Öğretmenler</label>
-            <select class="custom-select" size="4" v-model="selected" @click="listProgram($event.target.value.replace(/[^a-z][0-9]/g, ''), $event.target.value.replace( /^\D+/g, ''))"> 
+            <select class="custom-select" size="4" v-model="selected" @click="listProgram($event.target.value.replace(/[^a-z][0-9]/g, ''), $event.target.value.replace( /^\D+/g, ''))">
               <option v-for="ogretmen in ogretmenler" :key="ogretmen.id" :value="'ogretmen-'+ogretmen.id">{{ogretmen.ad}}</option>
             </select>
           </div>
@@ -36,14 +36,11 @@
             <CCard>
           <CCardHeader>
             Ders Programı
+            <div class="card-header-actions">
+              <CButton type="submit" color="dark" @click="createAllProgram()">Otomatik Yerleştir</CButton>
+            </div>
           </CCardHeader>
           <CCardBody>
-           <!-- <CButton color="info">
-              Tamamlama Kontrolü
-            </CButton>
-            <CButton color="danger">
-              Otomatik Yerleştir
-            </CButton>-->
 <table class="table table-bordered" v-if="program.length>0">
   <thead>
     <tr>
@@ -54,12 +51,12 @@
   <tbody>
     <tr v-for="ders in program">
       <td>{{ders.baslangic}} - {{ders.bitis}}</td>
-      <td 
-        v-for="(item, index) in 6" 
+      <td
+        v-for="(item, index) in 6"
         :key="index"
         v-if="ders[index]!=null"
         v-bind:class=" { 'bg-dark': ders[index]==0 }"
-        :value="ders[index]['saat']" 
+        :value="ders[index]['saat']"
         @click="showDersYerlestirModal(ders[index]['saat'])"
         @mouseover="hoverTable(ders[index]['saat'])"
         @mouseout="unHoverTable()"
@@ -69,13 +66,13 @@
         <span v-if="ders[index].ders!==undefined">{{ders[index].ders['ad']}}</span><br/>
         <span v-if="ders[index].ogretmen!==undefined">{{ders[index].ogretmen['ad']}} / </span>
         <span v-if="ders[index].derslik!==undefined">{{ders[index].derslik['ad']}}</span>
-      </td>      
+      </td>
     </tr>
   </tbody>
 </table>
           </CCardBody>
         </CCard>
-        </CCol>    
+        </CCol>
       </CRow>
       <form @submit.prevent="createOgretmen()" id="createOgretmenForm">
         <CModal
@@ -194,17 +191,28 @@ export default {
         .catch(error => {
           console.log(error.response.data);
         });
-    },  
+    },
     hoverTable(val){
       if(this.hoveredCell){
         document.getElementById(this.hoveredCell).removeAttribute('style');
       }
       document.getElementById('program-'+val).style.backgroundColor = "#00001513";
       this.hoveredCell = 'program-'+val;
-    }   , 
+    }   ,
     unHoverTable(){
         document.getElementById(this.hoveredCell).removeAttribute('style');
-    }
+    },
+    createAllProgram(){
+        axios.post('/api/program', {
+            automatic: '1',
+        })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+    },
   },
 }
 </script>

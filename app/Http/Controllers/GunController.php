@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GunRequest;
 use App\Models\Gun;
 use App\Models\Saat;
+use App\Models\Program;
 
 class GunController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         if(gun::count()==0){
@@ -29,7 +35,7 @@ class GunController extends Controller
                     gun::create($data);
                 }
             }
-        } 
+        }
         else {
             gun::create($req->all());
         }
@@ -40,16 +46,17 @@ class GunController extends Controller
         //
     }
 
-    public function update(Request $req, Dashboard $dashboard)
+    public function update(Request $req)
     {
         //
     }
 
-    public function destroy(Request $req)
+    public function destroy()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         gun::truncate();
         saat::truncate();
+        program::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

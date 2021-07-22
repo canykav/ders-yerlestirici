@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\OgretmenRequest;
 use App\Models\Ogretmen;
+use App\Models\ders;
+use Illuminate\Support\Facades\DB;
 
 class OgretmenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $ogretmenler = ogretmen::get();
@@ -19,12 +26,12 @@ class OgretmenController extends Controller
         ogretmen::create($req->all());
     }
 
-    public function show(Request $req, $ogretmen_id)
+    public function show(Request $req, $ogretmen)
     {
-        $ogretmen = ogretmen::findOrFail($ogretmen_id);
-        $ogretmen->dersler;
-        $ogretmen['toplam_saat'] = $ogretmen->getToplamSaat();
-        return response()->json(['status' => 'success','data' => $ogretmen]);
+        $ogr = ogretmen::findOrFail($ogretmen);
+        $ogr->dersler;
+        $ogr['toplam_saat'] = $ogr->getToplamSaat();
+        return response()->json(['status' => 'success','data' => $ogr]);
     }
 
     public function update(Request $req)
@@ -32,8 +39,8 @@ class OgretmenController extends Controller
         //
     }
 
-    public function destroy($ogretmen_id)
+    public function destroy($ogretmen)
     {
-        ogretmen::findOrFail($ogretmen_id)->delete();
+            ogretmen::findOrFail($ogretmen)->delete();
     }
 }

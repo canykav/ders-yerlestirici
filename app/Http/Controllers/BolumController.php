@@ -8,6 +8,11 @@ use App\Models\Bolum;
 
 class BolumController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $bolumler = bolum::get();
@@ -24,13 +29,13 @@ class BolumController extends Controller
         //
     }
 
-    public function update(Request $req, $bolum_id)
+    public function update(Request $req, $bolum)
     {
-        bolum::findOrFail($bolum_id)->update($req->all());
+        bolum::findOrFail($bolum)->update($req->all());
     }
 
-    public function destroy($bolum_id)
+    public function destroy($bolum)
     {
-        bolum::findorFail($bolum_id)->delete();
+        bolum::findorFail($bolum)->delete();
     }
 }

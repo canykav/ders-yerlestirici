@@ -113,9 +113,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -217,6 +214,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     unHoverTable: function unHoverTable() {
       document.getElementById(this.hoveredCell).removeAttribute('style');
+    },
+    createAllProgram: function createAllProgram() {
+      axios.post('/api/program', {
+        automatic: '1'
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
     }
   }
 });
@@ -328,11 +334,7 @@ var render = function() {
             }
           }
         },
-        [
-          _vm._v(
-            "\r\n              " + _vm._s(_vm.message) + "\r\n            "
-          )
-        ]
+        [_vm._v("\n              " + _vm._s(_vm.message) + "\n            ")]
       ),
       _vm._v(" "),
       _c(
@@ -346,7 +348,7 @@ var render = function() {
                 "CCard",
                 [
                   _c("CCardHeader", [
-                    _vm._v("\r\n            Ders Programı\r\n          ")
+                    _vm._v("\n            Ders Programı\n          ")
                   ]),
                   _vm._v(" "),
                   _c("CCardBody", [
@@ -532,7 +534,26 @@ var render = function() {
                 "CCard",
                 [
                   _c("CCardHeader", [
-                    _vm._v("\r\n            Ders Programı\r\n          ")
+                    _vm._v("\n            Ders Programı\n            "),
+                    _c(
+                      "div",
+                      { staticClass: "card-header-actions" },
+                      [
+                        _c(
+                          "CButton",
+                          {
+                            attrs: { type: "submit", color: "dark" },
+                            on: {
+                              click: function($event) {
+                                return _vm.createAllProgram()
+                              }
+                            }
+                          },
+                          [_vm._v("Otomatik Yerleştir")]
+                        )
+                      ],
+                      1
+                    )
                   ]),
                   _vm._v(" "),
                   _c("CCardBody", [

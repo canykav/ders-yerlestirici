@@ -16,11 +16,11 @@
             Ders Günleri ve Saatleri
           </CCardHeader>
           <CCardBody>
-          <CTabs variant="pills" :active-tab.sync="activeTab">
-              <CTab title="Ders Günleri">
+          <CTabs :active-tab.sync="activeTab">
+              <CTab title="Ders Günleri" :disabled="kayitliGunler==true">
                        <form @submit.prevent="createGun()">
-<div class="table-responsive">
-              <table  v-if='kayitliGunler==false' class="table table-bordered table-sm" style="border-top:none;">            
+            <div class="table-responsive">
+              <table  v-if='kayitliGunler==false' class="table table-bordered table-sm" style="border-top:none;">
                <tbody>
                 <tr>
                   <td :key="gun" v-for="gun in tumGunler">
@@ -32,13 +32,12 @@
                 </tr>
               </tbody>
               </table>
-              <span v-if='kayitliGunler==true'>Eklenen günler tabloda listelenmektedir.</span>
               </div>
 
               <div class="form-actions mt-3">
                 <CButton
                   type="submit"
-                  color="info" 
+                  color="info"
                   v-if="kayitliGunler==false"
                 >
                 Kaydet
@@ -73,14 +72,14 @@
                 </div>
             </form>
               </CTab>
-          </CTabs>                       
-            
-        
+          </CTabs>
+
+
           </CCardBody>
         </CCard>
 
       </CCol>
-          
+
       <CCol sm="6">
         <CCard>
           <CCardHeader>
@@ -120,7 +119,7 @@
 </template>
 <script>
 
-export default {    
+export default {
     data() {
         return {
           ogretim: [
@@ -142,7 +141,7 @@ export default {
           dismissSecs: 5,
           dismissCountDown: 5,
           activeTab: null,
-        }      
+        }
     },
     mounted() {
       this.listSaatler();
@@ -215,7 +214,7 @@ export default {
             })
             .catch(error => {
 				      console.log(error.response.data);
-            });        
+            });
       },
       showAlert(){
         this.dismissCountDown = this.dismissSecs;

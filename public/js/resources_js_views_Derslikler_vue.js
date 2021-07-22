@@ -350,14 +350,14 @@ var render = function() {
             }
           }
         },
-        [_vm._v("\r\n          " + _vm._s(_vm.message) + "\r\n        ")]
+        [_vm._v("\n          " + _vm._s(_vm.message) + "\n        ")]
       ),
       _vm._v(" "),
       _c(
         "CCard",
         [
           _c("CCardHeader", [
-            _vm._v("\r\n            Derslikler\r\n            "),
+            _vm._v("\n            Derslikler\n            "),
             _c(
               "div",
               { staticClass: "card-header-actions" },
@@ -714,9 +714,9 @@ var render = function() {
             },
             [
               _vm._v(
-                "\r\n         " +
+                "\n         " +
                   _vm._s(_vm.processedDerslik.ad) +
-                  " dersliği silinecektir. Emin misiniz?\r\n      "
+                  " dersliği silinecektir. Emin misiniz?\n      "
               )
             ]
           )

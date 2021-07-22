@@ -883,7 +883,7 @@ var render = function() {
   return _c("CFooter", { attrs: { fixed: false } }, [
     _c("div", { staticClass: "mfs-auto" }, [
       _c("span", { staticClass: "mr-1", attrs: { target: "_blank" } }, [
-        _vm._v("Ege Üniversitesi Bilgisayar Programcılığı")
+        _vm._v("canykav")
       ])
     ])
   ])

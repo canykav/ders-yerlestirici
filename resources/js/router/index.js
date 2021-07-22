@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 
 const Bolumler = () => import('../views/Bolumler')
-const Dersler = () => import('../views/Dersler')
 const Derslikler = () => import('../views/Derslikler')
 const Ogretmenler = () => import('../views/Ogretmenler')
 const Saatler = () => import('../views/Saatler')
@@ -80,17 +79,17 @@ function configRoutes () {
     {
       path: '/',
       redirect: '/dashboard',
-      name: 'Anasayfa',
+      name: 'Ders Yerleştirici',
       component: TheContainer,
       children: [
         {
           path: 'dashboard',
-          name: 'Dashboard',
+          name: 'Genel Bakış',
           component: Dashboard
         },
         {
           path: 'bolumler',
-          name: 'Bolumler',
+          name: 'Bölümler ve Dersler',
           component: Bolumler
         },
         {
@@ -99,23 +98,18 @@ function configRoutes () {
           component: Derslikler
         },
         {
-          path: 'dersler',
-          name: 'Dersler',
-          component: Dersler
-        },
-        {
           path: 'ogretmenler',
-          name: 'Ogretmenler',
+          name: 'Ögretmenler',
           component: Ogretmenler
         },
         {
           path: 'saatler',
-          name: 'Saatler',
+          name: 'Günler ve Saatler',
           component: Saatler
         },
         {
           path: 'program',
-          name: 'Program',
+          name: 'Ders Programı',
           component: Program
         },
         {

@@ -1,40 +1,62 @@
 <template>
   <div>
-    <WidgetsDropdown/>
-
+     <CCardGroup class="mb-4">
+      <CWidgetProgressIcon
+        :header="stats.gun_sayisi"
+        text="Ders Günü"
+      >
+      </CWidgetProgressIcon>
+      <CWidgetProgressIcon
+        :header="stats.ogretmen_sayisi"
+        text="Öğretmen"
+      >
+      </CWidgetProgressIcon>
+      <CWidgetProgressIcon
+        :header="stats.bolum_sayisi"
+        text="Bölüm"
+      >
+      </CWidgetProgressIcon>
+      <CWidgetProgressIcon
+        :header="stats.ders_sayisi"
+        text="Ders"
+      >
+      </CWidgetProgressIcon>
+      <CWidgetProgressIcon
+        :header="stats.derslik_sayisi"
+        text="Derslik"
+      >
+      </CWidgetProgressIcon>
+    </CCardGroup>
   </div>
 </template>
 
 <script>
-import MainChartExample from './charts/MainChartExample'
-import WidgetsDropdown from './widgets/WidgetsDropdown'
-
 export default {
   name: 'Dashboard',
-  components: {
-    MainChartExample,
-    WidgetsDropdown,
-  },
   data () {
     return {
-      selected: 'Month',
-
+      stats: {},
     }
   },
+  mounted(){
+      this.getStats();
+  },
   methods: {
-    color (value) {
-      let $color
-      if (value <= 25) {
-        $color = 'info'
-      } else if (value > 25 && value <= 50) {
-        $color = 'success'
-      } else if (value > 50 && value <= 75) {
-        $color = 'warning'
-      } else if (value > 75 && value <= 100) {
-        $color = 'danger'
-      }
-      return $color
+    getStats() {
+        axios.get('/api/stats')
+        .then(response => {
+            this.stats = response.data.data;
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
     }
   }
 }
 </script>
+
+<style >
+.progress {
+    display: none;
+}
+</style>

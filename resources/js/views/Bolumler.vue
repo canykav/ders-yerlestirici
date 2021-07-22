@@ -14,6 +14,17 @@
           </CCardHeader>
           <CCardBody>
             <div class="table-responsive">
+                <!--<CRow>
+                    <CCol :col="8">
+                        <CInput placeholder="Bölüm Ara.."/>
+                    </CCol>
+                    <CCol :col="4" class="pl-0">
+                        <CSelect
+                            placeholder="Öğretim"
+                            :options="ogretim"
+                        />
+                    </CCol>
+                </CRow>-->
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -40,7 +51,7 @@
           </CCardBody>
         </CCard>
       </CCol>
-          
+
       <CCol sm="6">
         <CCard>
           <CCardHeader>
@@ -54,7 +65,12 @@
             <CIcon :content="$options.zoom" height="42px" class="mb-1"/>
             Seçtiğiniz bölümün dersleri burada görüntülecektir.
           </CAlert>
-<div class="table-responsive" v-if="selectedBolum!=null">
+                <div class="table-responsive" v-if="selectedBolum!=null" style="position:relative;">
+                    <div v-if="derslerTableIsLoading==true" class="table-loading" style="width:100%;height:100%;position:absolute;background: #ffffff78; z-index: 500;">
+                    <div class="spinner-border" role="status" style="position:absolute;top: calc(50% - 21px); left: calc(50% - 21px);">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
 <table class="table table-bordered" v-if="selectedBolumContent.length>0">
   <thead>
     <tr>
@@ -75,10 +91,10 @@
       <td>{{ders.ogretmen_adi}}</td>
       <td>
         <CButtonGroup>
-          <CButton type="submit" color="info"><CIcon name="cil-pencil"/></CButton>
-          <CButton type="submit" color="danger"><CIcon :content="$options.trash"/></CButton>
+          <CButton type="submit" color="info" title="Düzenle" @click="showDersDuzenleModal(ders)"><CIcon name="cil-pencil"/></CButton>
+          <CButton type="submit" color="danger" title="Sil" @click="showDersSilModal(ders)"><CIcon :content="$options.trash"/></CButton>
         </CButtonGroup>
-      </td>      
+      </td>
     </tr>
   </tbody>
 </table>
@@ -201,6 +217,69 @@
     </CModal>
     </form>
 
+    <form @submit.prevent="updateDers()" id="updateDersForm">
+        <CModal
+            title="Ders Düzenleme"
+            size="sm"
+            :show.sync="dersDuzenleModal"
+        >
+        <CInput
+                label="Ders Kodu"
+                :value.sync="processedDers.kod"
+                required
+            />
+        <CInput
+            label="Ders Adı"
+            :value.sync="processedDers.ad"
+            required
+        />
+
+
+        <div class="form-group">
+           <label>Öğretmen</label>
+           <select class="form-control" v-model="processedDers.ogretmen" required>
+              <option v-if="ogretmenler.length!=0" :value="undefined" selected hidden>Seçiniz</option>
+              <option v-if="ogretmenler.length==0" :value="undefined" selected hidden>Listelenecek öğretmen bulunamadı</option>
+              <option v-for="ogretmen in ogretmenler" :key="ogretmen.id" :value="ogretmen.id">{{ogretmen.ad}}</option>
+            </select>
+        </div>
+          <CInput
+            label="Teorik Ders saati"
+            type="number"
+            :value.sync="processedDers.teorik"
+            required
+          />
+          <div class="form-group">
+            <label>Teorik Dersliği</label>
+            <select class="form-control" v-model="processedDers.teorik_derslik">
+              <option v-if="derslikler['sinif'].length!=0" :value="undefined" selected hidden>Seçiniz</option>
+              <option v-if="derslikler['sinif'].length==0" :value="undefined" selected hidden>Listelenecek derslik bulunamadı</option>
+              <option v-for="derslik in derslikler['sinif']" :key="derslik.id" :value="derslik.id">{{derslik.ad}}</option>
+            </select>
+          </div>
+          <CInput
+            label="Laboratuvar Ders saati"
+            type="number"
+            :value.sync="processedDers.lab"
+            required
+          />
+          <div class="form-group">
+            <label>Laboratuvar Dersliği</label>
+            <select class="form-control" v-model="processedDers.lab_derslik">
+              <option v-if="derslikler['laboratuvar'].length!=0" :value="undefined" selected hidden>Seçiniz</option>
+              <option v-if="derslikler['laboratuvar'].length==0" :value="undefined" selected hidden>Listelenecek derslik bulunamadı</option>
+              <option v-for="derslik in derslikler['laboratuvar']" :key="derslik.id" :value="derslik.id">{{derslik.ad}}</option>
+            </select>
+          </div>
+
+      <template #footer>
+        <CButton @click="dersDuzenleModal = false" color="secondary">Vazgeç</CButton>
+        <CButton form="updateDersForm" type="submit" color="primary">Kaydet</CButton>
+      </template>
+    </CModal>
+    </form>
+
+
      <form @submit.prevent="deleteBolum()" id="deleteBolumForm">
       <CModal
         title="Bölüm Silme"
@@ -215,35 +294,58 @@
       </template>
     </CModal>
     </form>
+
+<form @submit.prevent="deleteDers()" id="deleteDersForm">
+      <CModal
+        title="Ders Silme"
+        size="sm"
+        color="danger"
+        :show.sync="dersSilModal"
+      >
+         {{processedDers.ad}} dersi silinecektir. Emin misiniz?
+      <template #footer>
+        <CButton @click="dersSilModal = false" color="secondary">Vazgeç</CButton>
+        <CButton form="deleteDersForm" type="submit" color="danger">Sil</CButton>
+      </template>
+    </CModal>
+    </form>
+
+
     </div>
 </template>
 
+
+
 <script>
-import CTableWrapper from './base/Table.vue'
-import usersData from './users/UsersData'
 import { cilTrash, cilZoom, cilSad } from '@coreui/icons'
 export default {
   trash: cilTrash,
   zoom: cilZoom,
   sad: cilSad,
-  components: { CTableWrapper },
   data(){
       return {
-          bolumEkleModal: false,
-          dersEkleModal: false,
-          bolumDuzenleModal: false,
-          bolumSilModal: false,
-          selectedBolum: null,
-          processedBolum: {},
-          selectedBolumContent: {},
-          ogretmenler: null,
-          derslikler: null,
-          bolumler: {},
-          yeniBolum: {},
-          yeniDers: {},
-          message: null,
-          dismissSecs: 5,
-          dismissCountDown: 0,
+        bolumEkleModal: false,
+        dersEkleModal: false,
+        bolumDuzenleModal: false,
+        bolumSilModal: false,
+        selectedBolum: null,
+        processedBolum: {},
+        selectedBolumContent: {},
+        ogretmenler: null,
+        derslikler: {sinif: [], laboratuvar: [],},
+        bolumler: {},
+        yeniBolum: {},
+        yeniDers: {},
+        message: null,
+        dismissSecs: 5,
+        dismissCountDown: 0,
+        dersSilModal: false,
+        dersDuzenleModal: false,
+        processedDers: {},
+        derslerTableIsLoading: false,
+        ogretim: [
+            'Tümü','Örgün Öğretim','İkinci Öğretim'
+        ],
       }
   },
   mounted() {
@@ -266,7 +368,7 @@ export default {
           })
           .catch(error => {
             console.log(error.response.data);
-          });      
+          });
     },
     listBolumler() {
       axios.get('/api/bolumler')
@@ -324,6 +426,12 @@ export default {
       Object.assign(this.processedBolum, bolum);
       this.bolumSilModal=true;
     },
+
+    showDersSilModal(ders){
+      Object.assign(this.processedDers, ders);
+      this.dersSilModal=true;
+    },
+
     deleteBolum(){
       axios.delete('/api/bolumler/'+this.processedBolum.id)
       .then(response => {
@@ -333,16 +441,54 @@ export default {
           this.selectedBolum = null;
           this.selectedBolumContent= null;
         }
-        this.processedBolum = {};    
+        this.processedBolum = {};
       })
       .catch(error => {
         console.log(error.response.data);
       });
     },
+
+deleteDers(){
+      axios.delete('/api/dersler/'+this.processedDers.id)
+      .then(response => {
+        this.listBolumDersleri(this.processedDers.bolum);
+        this.dersSilModal=false;
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },
+
+
+updateDers(){
+      axios.put('/api/dersler/'+this.processedDers.id, {
+        kod: this.processedDers.kod,
+        ad: this.processedDers.ad,
+        ogretmen: this.processedDers.ogretmen,
+        teorik: this.processedDers.teorik,
+        teorik_derslik: this.processedDers.teorik_derslik,
+        lab: this.processedDers.lab,
+        lab_derslik: this.processedDers.lab_derslik,
+      })
+      .then(response => {
+          this.listBolumDersleri(this.processedDers.bolum);
+          this.dersDuzenleModal=false;
+          this.processedDers = {};
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+    },
+    showDersDuzenleModal(ders){
+      Object.assign(this.processedDers, ders);
+      this.dersDuzenleModal=true;
+    },
+
     listBolumDersleri(bolum){
-      if(this.selectedBolum){
-        document.getElementById('bolum-'+this.selectedBolum).style.backgroundColor = "#ffffff";
-      }
+        this.derslerTableIsLoading = true;
+        if(this.selectedBolum){
+            document.getElementById('bolum-'+this.selectedBolum).style.backgroundColor = "#ffffff";
+        }
       document.getElementById('bolum-'+bolum).style.backgroundColor = "#00001513";
       this.selectedBolum = bolum;
       axios.get('/api/dersler/', {
@@ -352,6 +498,7 @@ export default {
       })
       .then(response => {
           this.selectedBolumContent = response.data.data;
+          this.derslerTableIsLoading = false;
       })
       .catch(error => {
         console.log(error.response.data);

@@ -22430,10 +22430,6 @@ var Bolumler = function Bolumler() {
   return __webpack_require__.e(/*! import() */ "resources_js_views_Bolumler_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Bolumler */ "./resources/js/views/Bolumler.vue"));
 };
 
-var Dersler = function Dersler() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_Dersler_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Dersler */ "./resources/js/views/Dersler.vue"));
-};
-
 var Derslikler = function Derslikler() {
   return __webpack_require__.e(/*! import() */ "resources_js_views_Derslikler_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Derslikler */ "./resources/js/views/Derslikler.vue"));
 };
@@ -22461,153 +22457,153 @@ var Dashboard = function Dashboard() {
 };
 
 var Colors = function Colors() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_theme_Colors_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/theme/Colors */ "./resources/js/views/theme/Colors.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/theme/Colors'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Typography = function Typography() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_theme_Typography_vue").then(__webpack_require__.bind(__webpack_require__, /*! ..//views/theme/Typography */ "./resources/js/views/theme/Typography.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '..//views/theme/Typography'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Charts = function Charts() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_charts_Charts_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/charts/Charts */ "./resources/js/views/charts/Charts.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/charts/Charts'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Widgets = function Widgets() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_widgets_Widgets_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/widgets/Widgets */ "./resources/js/views/widgets/Widgets.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/widgets/Widgets'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 }; // Views - Components
 
 
 var Cards = function Cards() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Cards_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Cards */ "./resources/js/views/base/Cards.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Cards'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Forms = function Forms() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Forms_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Forms */ "./resources/js/views/base/Forms.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Forms'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Switches = function Switches() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Switches_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Switches */ "./resources/js/views/base/Switches.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Switches'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Tables = function Tables() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Tables_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Tables */ "./resources/js/views/base/Tables.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Tables'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Tabs = function Tabs() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Tabs_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Tabs */ "./resources/js/views/base/Tabs.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Breadcrumbs = function Breadcrumbs() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Breadcrumbs_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Breadcrumbs */ "./resources/js/views/base/Breadcrumbs.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Breadcrumbs'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Carousels = function Carousels() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Carousels_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Carousels */ "./resources/js/views/base/Carousels.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Carousels'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Collapses = function Collapses() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Collapses_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Collapses */ "./resources/js/views/base/Collapses.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Collapses'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Jumbotrons = function Jumbotrons() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Jumbotrons_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Jumbotrons */ "./resources/js/views/base/Jumbotrons.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Jumbotrons'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var ListGroups = function ListGroups() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_ListGroups_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/ListGroups */ "./resources/js/views/base/ListGroups.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/ListGroups'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Navs = function Navs() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Navs_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Navs */ "./resources/js/views/base/Navs.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Navs'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Navbars = function Navbars() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Navbars_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Navbars */ "./resources/js/views/base/Navbars.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Navbars'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Paginations = function Paginations() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Paginations_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Paginations */ "./resources/js/views/base/Paginations.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Paginations'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Popovers = function Popovers() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Popovers_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Popovers */ "./resources/js/views/base/Popovers.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Popovers'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var ProgressBars = function ProgressBars() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_ProgressBars_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/ProgressBars */ "./resources/js/views/base/ProgressBars.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/ProgressBars'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Tooltips = function Tooltips() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_base_Tooltips_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/base/Tooltips */ "./resources/js/views/base/Tooltips.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/base/Tooltips'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 }; // Views - Buttons
 
 
 var StandardButtons = function StandardButtons() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_buttons_StandardButtons_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/buttons/StandardButtons */ "./resources/js/views/buttons/StandardButtons.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/buttons/StandardButtons'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var ButtonGroups = function ButtonGroups() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_buttons_ButtonGroups_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/buttons/ButtonGroups */ "./resources/js/views/buttons/ButtonGroups.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/buttons/ButtonGroups'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Dropdowns = function Dropdowns() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_buttons_Dropdowns_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/buttons/Dropdowns */ "./resources/js/views/buttons/Dropdowns.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/buttons/Dropdowns'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var BrandButtons = function BrandButtons() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_buttons_BrandButtons_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/buttons/BrandButtons */ "./resources/js/views/buttons/BrandButtons.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/buttons/BrandButtons'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 }; // Views - Icons
 
 
 var CoreUIIcons = function CoreUIIcons() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_icons_CoreUIIcons_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/icons/CoreUIIcons */ "./resources/js/views/icons/CoreUIIcons.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/icons/CoreUIIcons'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Brands = function Brands() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_icons_Brands_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/icons/Brands */ "./resources/js/views/icons/Brands.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/icons/Brands'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Flags = function Flags() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_icons_Flags_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/icons/Flags */ "./resources/js/views/icons/Flags.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/icons/Flags'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 }; // Views - Notifications
 
 
 var Alerts = function Alerts() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_notifications_Alerts_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/notifications/Alerts */ "./resources/js/views/notifications/Alerts.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/notifications/Alerts'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Badges = function Badges() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_notifications_Badges_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/notifications/Badges */ "./resources/js/views/notifications/Badges.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/notifications/Badges'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Modals = function Modals() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_notifications_Modals_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/notifications/Modals */ "./resources/js/views/notifications/Modals.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/notifications/Modals'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 }; // Views - Pages
 
 
 var Page404 = function Page404() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_pages_Page404_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/pages/Page404 */ "./resources/js/views/pages/Page404.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/pages/Page404'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Page500 = function Page500() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_pages_Page500_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/pages/Page500 */ "./resources/js/views/pages/Page500.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/pages/Page500'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_pages_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/pages/Login */ "./resources/js/views/pages/Login.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/pages/Login'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var Register = function Register() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_pages_Register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/pages/Register */ "./resources/js/views/pages/Register.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/pages/Register'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 }; // Users
 
 
 var Users = function Users() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_users_Users_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/users/Users */ "./resources/js/views/users/Users.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/users/Users'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 var User = function User() {
-  return __webpack_require__.e(/*! import() */ "resources_js_views_users_User_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/users/User */ "./resources/js/views/users/User.vue"));
+  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module '../views/users/User'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
 };
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_1__.default);
@@ -22627,35 +22623,31 @@ function configRoutes() {
   return [{
     path: '/',
     redirect: '/dashboard',
-    name: 'Anasayfa',
+    name: 'Ders Yerleştirici',
     component: TheContainer,
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: 'Genel Bakış',
       component: Dashboard
     }, {
       path: 'bolumler',
-      name: 'Bolumler',
+      name: 'Bölümler ve Dersler',
       component: Bolumler
     }, {
       path: 'derslikler',
       name: 'Derslikler',
       component: Derslikler
     }, {
-      path: 'dersler',
-      name: 'Dersler',
-      component: Dersler
-    }, {
       path: 'ogretmenler',
-      name: 'Ogretmenler',
+      name: 'Ögretmenler',
       component: Ogretmenler
     }, {
       path: 'saatler',
-      name: 'Saatler',
+      name: 'Günler ve Saatler',
       component: Saatler
     }, {
       path: 'program',
-      name: 'Program',
+      name: 'Ders Programı',
       component: Program
     }, {
       path: 'theme',
@@ -90099,7 +90091,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_Bolumler_vue":1,"resources_js_views_Dersler_vue":1,"resources_js_views_Derslikler_vue":1,"resources_js_views_Ogretmenler_vue":1,"resources_js_views_Saatler_vue":1,"resources_js_views_Program_vue":1,"resources_js_containers_TheContainer_vue":1,"resources_js_views_Dashboard_vue":1,"resources_js_views_theme_Colors_vue":1,"resources_js_views_theme_Typography_vue":1,"resources_js_views_charts_Charts_vue":1,"resources_js_views_widgets_Widgets_vue":1,"resources_js_views_base_Cards_vue":1,"resources_js_views_base_Forms_vue":1,"resources_js_views_base_Switches_vue":1,"resources_js_views_base_Tables_vue":1,"resources_js_views_base_Tabs_vue":1,"resources_js_views_base_Breadcrumbs_vue":1,"resources_js_views_base_Carousels_vue":1,"resources_js_views_base_Collapses_vue":1,"resources_js_views_base_Jumbotrons_vue":1,"resources_js_views_base_ListGroups_vue":1,"resources_js_views_base_Navs_vue":1,"resources_js_views_base_Navbars_vue":1,"resources_js_views_base_Paginations_vue":1,"resources_js_views_base_Popovers_vue":1,"resources_js_views_base_ProgressBars_vue":1,"resources_js_views_base_Tooltips_vue":1,"resources_js_views_buttons_StandardButtons_vue":1,"resources_js_views_buttons_ButtonGroups_vue":1,"resources_js_views_buttons_Dropdowns_vue":1,"resources_js_views_buttons_BrandButtons_vue":1,"resources_js_views_icons_CoreUIIcons_vue":1,"resources_js_views_icons_Brands_vue":1,"resources_js_views_icons_Flags_vue":1,"resources_js_views_notifications_Alerts_vue":1,"resources_js_views_notifications_Badges_vue":1,"resources_js_views_notifications_Modals_vue":1,"resources_js_views_pages_Page404_vue":1,"resources_js_views_pages_Page500_vue":1,"resources_js_views_pages_Login_vue":1,"resources_js_views_pages_Register_vue":1,"resources_js_views_users_Users_vue":1,"resources_js_views_users_User_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_Bolumler_vue":1,"resources_js_views_Derslikler_vue":1,"resources_js_views_Ogretmenler_vue":1,"resources_js_views_Saatler_vue":1,"resources_js_views_Program_vue":1,"resources_js_containers_TheContainer_vue":1,"resources_js_views_Dashboard_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -8,7 +8,7 @@
             Derslikler
             <div class="card-header-actions">
               <CButton type="submit" color="dark" @click="derslikEkleModal=true;">Derslik Ekle</CButton>
-            </div>           
+            </div>
           </CCardHeader>
           <CCardBody>
 
@@ -20,7 +20,7 @@
       <th scope="col" style="width:187px">İşlem</th>
     </tr>
   </thead>
-  <tbody>
+    <tbody>
     <tr v-for="derslik in derslikler" :key="derslik.id">
       <td>{{derslik.ad}}</td>
       <td>{{derslik.tur}}</td>
@@ -143,7 +143,7 @@ export default {
           })
           .catch(error => {
             console.log(error.response.data);
-          });      
+          });
     },
     listDerslikler() {
     axios.get('/api/derslikler')
@@ -171,18 +171,18 @@ export default {
       .catch(error => {
         console.log(error.response.data);
       });
-    },  
+    },
     deleteDerslik(){
       axios.delete('/api/derslikler/'+this.processedDerslik.id)
       .then(response => {
         this.listDerslikler();
         this.derslikSilModal=false;
-        this.processedDerslik = {};    
+        this.processedDerslik = {};
       })
       .catch(error => {
         console.log(error.response.data);
       });
-    },  
+    },
     showAlert(){
       this.dismissCountDown = this.dismissSecs;
     },
